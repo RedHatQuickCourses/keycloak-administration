@@ -1,0 +1,5 @@
+In this chapter, we will walk through the process of managing your documentation structure. 
+
+When you need to update your project organization, you will primarily work with the `antora.yaml` file. To add or remove a section, simply update the entries within that configuration file. 
+
+It is important to remember that these configuration changes must be paired with physical file changes. Whenever you add or remove an entry in your configuration, make sure you also create or delete the corresponding directory for that chapter within your file system. Keeping your directory structure in sync with your configuration file ensures that your documentation builds correctly.

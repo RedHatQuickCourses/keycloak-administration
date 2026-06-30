@@ -1,0 +1,29 @@
+Delegating authentication allows your applications to offload the responsibility of verifying user credentials to an external system. Within the Red Hat build of Keycloak, this is handled by a feature known as the Identity Broker. By acting as an intermediary, Keycloak enables your users to sign in using accounts from external identity providers—such as Google, GitHub, or other SAML-based enterprise systems—while allowing you to maintain a unified security policy for all your internal applications.
+
+Let’s look at how this identity delegation works. When a user attempts to access your application, Red Hat build of Keycloak intercepts the request and redirects the user to your configured external identity provider. Once that provider successfully authenticates the user, it sends an assertion or token back to Keycloak. Keycloak then validates this response and issues its own internal token to the client application.
+
+This process provides three key benefits. First, it offers protocol abstraction, meaning your client application only needs to understand the Keycloak protocol, whether that is OIDC or SAML, regardless of the user's initial authentication method. Second, it allows for centralized management, so you can control authentication policies in one place. Finally, it provides a seamless user experience, as users can access your services using existing credentials without the need to create new, siloed accounts.
+
+A critical aspect of this process is the use of Identity Provider Mappers. These mappers allow you to transform and map incoming tokens or assertions into local user attributes or session information. This is essential for three main reasons: synchronizing user profile data like email or name from the external provider to your local records, mapping external roles to your local groups, and propagating session data so your client application has the necessary context to authorize the user.
+
+Now, let's walk through a guided exercise on integrating an external OpenID Connect identity provider as an identity broker.
+
+Before we begin, ensure you have a running instance of Red Hat build of Keycloak, and that you have already registered an application client on your target external OIDC provider, such as Google.
+
+To configure the integration, follow these steps:
+
+First, access the Red Hat build of Keycloak Admin Console and select the realm where you want to configure the brokering. 
+
+Second, navigate to the Identity Providers section. In the left-hand menu, click "Identity providers," then click the "Add provider" dropdown and select "OpenID Connect v1.0."
+
+Third, configure the provider details. Enter a unique name for the provider in the Alias field, such as `external-oidc`. Next, enter the Client ID and Client Secret provided by your external OIDC provider. Finally, enter the Discovery Endpoint URL, which is the path to the external provider’s `.well-known/openid-configuration`.
+
+Once you have entered these details, click "Save." It is important to copy the Redirect URI provided in the settings and ensure your external identity provider has this exact callback URL configured. To test the setup, open a new browser session and navigate to your application. You should now see the external provider listed as an option on your login page.
+
+If you encounter any issues, here are a few troubleshooting tips:
+
+If you see an "Invalid Redirect URI" error, double-check that the URI in the Keycloak configuration matches exactly what is registered in your external provider's dashboard.
+
+If you experience token mapping issues, such as user attributes failing to appear after login, check the Mappers tab in your Identity Provider configuration to ensure the mapper type matches the data structure expected from your provider.
+
+Finally, if authentication fails with an "invalid token" message, keep in mind that this is often caused by clock skew. Ensure the system time on your Keycloak server is synchronized via NTP, as any significant difference between the server clocks can cause token validation to fail.

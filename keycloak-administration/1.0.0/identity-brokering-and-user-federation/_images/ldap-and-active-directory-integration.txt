@@ -1,0 +1,19 @@
+Red Hat build of Keycloak provides robust support for integrating existing directory services, allowing your organization to centralize identity management. By leveraging LDAP and Microsoft Active Directory, you can delegate user authentication and attribute synchronization to your existing enterprise infrastructure.
+
+Let’s start with an overview of user federation. User federation allows Keycloak to act as a bridge between your applications and an external user store. Instead of migrating all users into the Keycloak database, Keycloak queries your LDAP or Active Directory server in real-time or through periodic synchronization. This approach offers three key benefits: First, it provides a single source of truth, allowing you to manage user lifecycles directly in your existing directory. Second, it enables seamless single sign-on, so users can utilize their existing corporate credentials to access applications protected by Keycloak. And third, it allows for flexible mapping, where you can map LDAP attributes, such as department or employee ID, directly to Keycloak user attributes or tokens.
+
+Now, let’s look at how to configure LDAP integration. To connect your directory service, you must define an LDAP provider within a specific realm. Begin by navigating to the User Federation section in the Admin Console. Click "Add provider" and select "ldap." From here, configure the connection settings. You will need to provide the Connection URL, such as `ldap://ldap.example.com:389`; the Users DN, which is the base distinguished name where your users reside; and the Bind DN and password, which are the credentials Keycloak uses to query the directory.
+
+Keep in mind that it is critical to set the LDAP bind credential correctly. This credential must have read permissions for the specified User DN subtree to allow Keycloak to successfully authenticate and fetch user details.
+
+Integrating Microsoft Active Directory requires specific handling for user account control and state management. Keycloak includes dedicated mappers to ensure compatibility with AD-specific attributes. For example, when integrating with Active Directory, you often need to map the `userAccountControl` attribute to handle disabled accounts correctly. You can automate this process using the Admin CLI, or `kcadm.sh`. 
+
+To create this mapper, first identify the parent ID of your existing LDAP provider by running the command `kcadm.sh get components` followed by the flag `-r` and your realm name. Once you have that ID, execute the `kcadm.sh create components` command using the specific provider ID for the `msad-user-account-control-mapper` and pointing it to your parent LDAP provider ID.
+
+To help you gain hands-on experience, we have a guided exercise for federating users with LDAP. First, define the LDAP provider by navigating to the Admin Console, selecting your realm, and adding the provider using the details provided by your infrastructure team. Second, test the connection using the "Test connection" and "Test authentication" buttons within the configuration page to ensure your credentials and DN structure are valid. Third, synchronize your users by using the "Synchronize all users" action. This imports existing directory users into the Keycloak user cache, ensuring they are searchable for role assignments.
+
+Finally, consider this lab to put your knowledge into practice. Your tasks are:
+First, configure an LDAP connection in the `demorealm`.
+Second, add an MS Active Directory mapper to handle user status synchronization.
+Third, enable "Import Users" to allow Keycloak to mirror the LDAP user profile in its internal database.
+And fourth, attempt to log in via the Account Console using a credential that exists only in your LDAP server. Once you have done this, verify that the user record appears in the Keycloak Admin Console after that first successful login.

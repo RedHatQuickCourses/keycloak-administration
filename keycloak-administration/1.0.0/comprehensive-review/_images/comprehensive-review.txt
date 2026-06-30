@@ -1,0 +1,7 @@
+Welcome to the Comprehensive Review module. This session serves as the final assessment of the Red Hat build of Keycloak training curriculum, designed to reinforce your technical proficiency by consolidating core security concepts and practical configuration skills.
+
+We will focus on three key areas of development. First, we will engage in conceptual consolidation, which provides a holistic recap of identity management principles, including single sign-on standards such as OIDC, OAuth 2.0, and SAML 2.0, as well as the underlying architectural foundations.
+
+Second, we will move into security validation, where we review essential mechanisms like credential isolation, proper token handling, and the management of authentication flows.
+
+Finally, we will complete an applied assessment. This concluding laboratory exercise requires you to integrate your knowledge of installation, configuration, and administrative tasks to verify your overall mastery of the Red Hat build of Keycloak environment.

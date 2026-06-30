@@ -1,0 +1,11 @@
+To begin your training, you will first need to launch your lab environment on the Red Hat Demo Platform, or RHDP. Please follow these steps to get your environment up and running.
+
+First, log in to the RHDP portal. If you are a Red Hat associate, please use the link provided on the demo dot red hat dot com website. If you are a Red Hat partner, please use the link for the partner demo portal. 
+
+Once you are logged in, search for the catalog entry titled "FIXME Lab Catalog Name." When you see it in your search results, click on that entry to open the catalog page. From there, click the "Order" button.
+
+A form will appear. Fill out all the required details, and pay close attention to the warning at the bottom of the form. You must check the box that says, "I confirm that I understand the above warnings" before you can proceed. Once that box is checked, click the "Order" button to finalize your request.
+
+Please keep a few important notes in mind during this process. First, it may take approximately "FIXME minutes" for your lab environment to become ready for use. You will receive an email notification containing your access details as soon as the environment is provisioned. Alternatively, you can retrieve your access information directly from the portal at any time.
+
+To access your lab through the portal, simply click on the "Services" option located in the left-hand menu. From there, select your lab from the list on the right-hand side of the page to view your specific access details.

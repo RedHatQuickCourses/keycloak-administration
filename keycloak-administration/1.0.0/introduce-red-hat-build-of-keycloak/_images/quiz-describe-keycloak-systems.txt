@@ -1,0 +1,17 @@
+Now, let's test your understanding of core architectural concepts and the foundational role the Red Hat build of Keycloak plays in modern identity and access management, or IAM, environments. We will go through a few questions to solidify your knowledge.
+
+First, consider this question: which of the following best describes the primary function of the Red Hat build of Keycloak in a distributed application architecture? Is it a primary database for business logic, a centralized identity and access management server, a network firewall, or a web server framework?
+
+The correct answer is that it acts as a centralized Identity and Access Management server, providing Single Sign-On, or SSO, and identity brokering. The Red Hat build of Keycloak is an open-source IAM solution that enables SSO, identity brokering, and user federation. This allows applications to delegate authentication to a central authority, rather than managing credentials independently.
+
+Next, let's look at authentication protocols. The Red Hat build of Keycloak supports several industry-standard protocols for secure authentication and authorization. Which of the following is not a protocol natively supported by Keycloak: OpenID Connect, OAuth 2.0, SAML 2.0, or SSH?
+
+The answer is SSH. While the Red Hat build of Keycloak is built on open standards like OIDC, OAuth 2.0, and SAML 2.0, SSH is a cryptographic network protocol used for secure remote login to computers, which falls outside the scope of web-based identity management.
+
+Moving on to architectural concepts, what is meant by credential isolation within the context of Keycloak architecture? Is it storing passwords in plain text, ensuring applications do not handle user credentials by offloading authentication, physically moving the server to an isolated network, or forcing frequent password resets?
+
+The correct answer is that it involves ensuring that individual applications do not handle or store user credentials, as authentication is offloaded to the Keycloak server. Credential isolation is a critical security benefit of centralized IAM. By using protocols like OIDC, applications interact with the Keycloak server to verify identities. This ensures that sensitive user credentials remain sequestered within the secure Keycloak environment and are never exposed to the client applications themselves.
+
+Finally, which architectural concept allows Keycloak to bridge multiple identity sources—such as LDAP, Active Directory, or social logins—and present them as a unified identity? Is it identity brokering, load balancing, database replication, or reverse proxying?
+
+The correct answer is identity brokering. Identity brokering enables the integration of external identity providers. This allows Keycloak to act as an intermediary, delegating authentication to third-party systems or internal directories while providing a consistent single sign-on experience to the end user.

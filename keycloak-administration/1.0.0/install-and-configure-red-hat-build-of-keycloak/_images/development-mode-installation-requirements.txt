@@ -1,0 +1,19 @@
+The Red Hat build of Keycloak offers a dedicated development mode designed specifically for rapid prototyping, theme development, and initial exploration. This mode prioritizes ease of use and immediate feedback by relaxing several of the security and performance constraints that are strictly enforced in production environments.
+
+Development mode is your recommended starting point when you want to get an instance up and running quickly. While production mode requires strict security and networking configurations, development mode automatically applies a set of convenient defaults to help you streamline your development lifecycle.
+
+It is critical to remember that development mode should never be used in a production environment; it is intended strictly for local development and testing purposes.
+
+When you start the Red Hat build of Keycloak in development mode, the server initializes with several key configuration defaults. First, HTTP is enabled by default, which means you do not need to configure SSL or TLS certificates and keystores during your initial setup. Second, strict hostname resolution is disabled, allowing you to access the server using various hostnames like "localhost" or local IP addresses without needing complex DNS or proxy configurations. Third, the caching mechanism is set to "local," which simplifies the startup process by avoiding distributed cache configurations. Finally, theme and template caching are disabled, which is a vital feature for developers because it allows changes to themes or FreeMarker templates to take effect immediately without needing to restart the server.
+
+Before you launch the server in development mode, ensure your environment meets these three requirements. First, verify you have a compatible Java Runtime Environment or Java Development Kit installed. You should refer to the Red Hat Knowledgebase article on supported configurations to confirm the specific versions compatible with your version of the Red Hat build of Keycloak. Second, ensure you have successfully downloaded and extracted the distribution archive and are familiar with the directory structure. Third, make sure the standard ports, typically 8080, are not occupied by other services on your machine.
+
+Let’s walk through a brief exercise to verify your environment.
+
+First, check your Java version. Open your terminal and run the command `java -version`. 
+
+Second, validate your installation directory. Navigate to the folder where you extracted the distribution and ensure that the `bin`, `conf`, and `providers` directories are present. 
+
+Third, consult the official supported configurations. Before you proceed, visit the Red Hat Knowledgebase to confirm that your specific operating system, Java version, and database are supported.
+
+As a final tip, remember that if you are developing custom themes, the automatic cache disabling in development mode is your most powerful tool. However, if you decide to transition to production mode in the future, keep in mind that you will need to manually configure these cache settings to optimize your server's performance.

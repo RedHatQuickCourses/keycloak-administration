@@ -1,0 +1,17 @@
+In this guided exercise, you will learn how to interact with the Red Hat build of Keycloak using the Admin CLI tool, known as kcadm.sh on Linux or kcadm.bat on Windows. The Admin CLI is a powerful utility that allows you to perform administrative tasks like creating realms, managing users, and updating configurations directly from your terminal.
+
+Before we begin, ensure you have a running instance of the Red Hat build of Keycloak, the kcadm tool installed in your bin directory, and the credentials for an administrative user.
+
+Our first step is to authenticate with the Admin CLI. Because the CLI uses an OIDC session to interact with the Admin REST API, you must establish a session before running any commands. Open your terminal, navigate to the bin directory of your Keycloak distribution, and run the configuration credentials command. You will need to provide your server URL, the target realm—which is typically the master realm—and your admin username and password. 
+
+A helpful note to keep in mind: if your authentication is successful, the CLI saves an access token locally. This means you won’t need to re-authenticate for subsequent commands in this session.
+
+Once you are authenticated, you can explore the existing realms. Execute the command `./kcadm.sh get realms`. You should see the JSON output for your realms, including the master realm, which confirms your CLI session is correctly communicating with the server.
+
+Next, let’s look at how to create a new realm using the Admin CLI, which is a great way to automate resource creation. First, create a file named new-realm.json in your directory. Inside that file, define your realm with the name "Development" and set the "enabled" property to true. Once the file is saved, run the command `./kcadm.sh create realms -f new-realm.json`. You can verify that the new realm was created by running the get realms command again.
+
+Beyond managing realms, you can also perform CRUD operations on users. To create a user in your new Development realm, use the create users command, specifying the realm, the username, and ensuring the enabled flag is set to true. After creating the user, you can set their password by running the set-password command, pointing it to the Development realm and providing a secure password.
+
+If you run into any issues, there are a few things to check. First, verify your connectivity by ensuring the server is reachable via the server flag. Second, confirm your permissions, as the account you are using must have the manage-realm or appropriate fine-grained permissions for the target realm. Finally, if you see unexpected errors, you can append the double-dash debug flag to your command. This will allow you to see the underlying HTTP requests and responses, providing valuable insight into what might be going wrong.
+
+To wrap things up, you have now learned how to authenticate a CLI session, retrieve and create resources using standard Admin API operations, and manage user credentials via the command line. These skills are essential for automating administrative tasks in CI/CD pipelines or for general operational scripting.

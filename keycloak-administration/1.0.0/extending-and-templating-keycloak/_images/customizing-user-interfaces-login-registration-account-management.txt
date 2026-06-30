@@ -1,0 +1,23 @@
+In the Red Hat build of Keycloak, themes allow you to define the look and feel of your user-facing pages. Customization helps your organization align the authentication experience with your brand identity, ensuring a secure and consistent journey across your login, registration, and account management portals.
+
+Keycloak uses the FreeMarker template engine to render HTML. To customize your interface, you create a custom theme directory that overrides specific templates, styles, or resources, rather than modifying the core files directly. There are three primary areas you can customize: the Login theme, which covers authentication and registration pages; the Account theme, which manages the user profile and account console; and the Email theme, which controls the design of automated emails like password reset links.
+
+While template customization is powerful, modern versions of the Red Hat build of Keycloak also offer dynamic user profile customization. This allows you to modify the user experience without deep-diving into code. By using the User Profile feature, you can define validation rules for specific attributes, enable dynamic form rendering, and automatically sync your custom attributes with the Administration Console.
+
+Now, let's walk through a guided exercise to create a basic custom theme for your login page. 
+
+Before you begin, ensure you have a running instance of the Red Hat build of Keycloak and that you have direct access to the file system where it is installed.
+
+First, you need to create the directory structure. Navigate to your Keycloak installation directory and run the command: `mkdir -p themes/mycompany/login`. This establishes the workspace for your new theme.
+
+Second, define the theme metadata. Create a file named `theme.properties` inside your `themes/mycompany/login/` directory. This file tells Keycloak how to behave. Set the `parent` property to `base` and import `common/default`. This ensures your theme starts with all necessary functional foundations.
+
+Third, you will override a template. Copy the `login.ftl` file from the base theme and place it into your custom directory using the command: `cp themes/base/login/login.ftl themes/mycompany/login/`. Once the file is copied, you can open `login.ftl` and modify the HTML structure to add custom headers or change CSS classes to match your branding.
+
+Finally, you need to apply the theme. Log in to the Admin Console, select your Realm, and navigate to Realm settings, then select Themes. In the Login theme dropdown menu, select `mycompany` and click Save. Your new theme will now be active.
+
+As you work with customizations, keep these best practices in mind. Always extend the `base` or `keycloak` theme using the `parent` property. This ensures you inherit essential security fixes and hidden form fields, so you only need to manage the files you’ve specifically changed.
+
+Whenever possible, avoid hardcoding text strings. Instead, use message bundles to maintain multi-language support. Also, remember to check the User Profile tab in the Admin Console before editing raw template files; many structural changes can be handled through configuration rather than manual code changes. 
+
+Finally, if you are working in a development environment, you can adjust your configuration settings to disable theme caching. This allows your changes to reflect immediately without needing to restart the server.

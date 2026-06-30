@@ -1,0 +1,15 @@
+In this guided exercise, you will learn how to configure a basic authentication flow to verify user identity against the Red Hat build of Keycloak internal user database. By the end of this session, you will have defined a new realm, created a test user, and successfully validated the authentication process using the Admin Console.
+
+Before we begin, please ensure that you have a running instance of Red Hat build of Keycloak version 26.6, and that you have active access to the Keycloak Admin Console.
+
+Now, let’s start with the first step: creating a realm. Keep in mind that realms act as isolated environments, each containing its own unique set of users, credentials, roles, and groups. To create one, first log in to the Admin Console. In the top-left corner, click the dropdown menu and select "Create realm." Enter "training-realm" as the name, and then click the "Create" button.
+
+Next, we need to define a test user within this new environment. In the left-hand navigation menu, select "Users" and then click "Add user." Fill in the user details as follows: for the username, enter "jdoe"; for the email address, use "jdoe@example.com"; and for the first and last names, use "John" and "Doe" respectively. Once those fields are filled, click "Create."
+
+To allow this new user to authenticate, you must set up a temporary password. Navigate to the "Credentials" tab within the user’s profile and click "Set password." Enter a secure password, such as "Password123!". You will notice a "Temporary" toggle; if you do not want the user to be forced to change this password upon their first login, toggle this setting to "OFF." Finally, click "Save" and confirm the change in the modal prompt.
+
+Now, let's verify that the authentication flow is working correctly by using the built-in account console. In the top-right corner of the Admin Console, click on your administrator profile icon and select "Manage account." If you are prompted to do so, log out of your current admin session. Then, attempt to log in using the credentials we just created: use "jdoe" as the username and "Password123!" as the password. If the configuration is successful, you will be directed to the Keycloak Account Management console for the user John Doe.
+
+If you run into any issues, here are a few troubleshooting tips. If you encounter an authentication error, ensure the user account is not locked and that the password was saved correctly; you can check the "Attributes" tab to verify the user is enabled. If you cannot log in, double-check that you are testing against the "training-realm" rather than the "master" realm. Additionally, if the Account Console page fails to load, verify that your "training-realm" is configured with the default browser flow in the "Authentication" tab.
+
+To summarize, you have now successfully isolated a set of credentials within a dedicated realm and validated the identity verification process. This setup serves as the foundation for more advanced scenarios, such as OpenID Connect integration or enforcing multi-factor authentication, which we will explore in later modules.

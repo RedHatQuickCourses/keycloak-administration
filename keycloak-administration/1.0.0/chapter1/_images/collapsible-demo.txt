@@ -1,0 +1,11 @@
+In this lesson, we are going to look at how to implement collapsible blocks in your documentation. These elements are a great way to present optional information—such as hints, deep dives, or extra context—without cluttering the main flow of your lesson. These blocks are built directly into Asciidoctor, so no additional extensions are required to use them in Antora.
+
+Let’s look at how you can use these blocks effectively.
+
+First, consider using them for hints. These are perfect for providing guidance that learners can access if they get stuck. For instance, if you provide a practice exercise, you might include a hint block that suggests checking environment variables or reviewing the previous configuration section before asking for help. Remember, the goal is to encourage learners to try the exercise on their own first.
+
+Next, you can use collapsible blocks for deep dives. This is an excellent way to provide supplementary technical details without distracting from the core learning objective. For example, if you are explaining a build process, you might include a deep dive that details how the validate, compile, and package stages relate to one another. You could also include essential command-line instructions here, such as running "./gradlew clean build" to ensure that skipping a stage doesn’t leave your artifacts out of date. By using a collapsible block, you keep that technical detail available for those who need it, while keeping the primary lesson concise for everyone else.
+
+Finally, while these blocks are typically collapsed by default, you can also configure them to start in an expanded state. You do this by adding an "open" attribute to the block. Use this sparingly, however, and only when the additional context is still optional but important enough that you want it visible to the learner the moment they land on the page.
+
+By using these three patterns—hints, deep dives, and expanded optional context—you can create a more modular and learner-friendly experience that balances necessary information with readability.

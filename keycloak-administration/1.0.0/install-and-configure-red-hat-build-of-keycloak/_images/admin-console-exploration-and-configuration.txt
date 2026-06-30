@@ -1,0 +1,21 @@
+Welcome to this training module on the Red Hat build of Keycloak Admin Console. The Admin Console is your centralized, web-based interface for managing every aspect of your identity and access management system. Through this portal, you can control realms, users, clients, identity providers, and authentication flows.
+
+Let's begin by understanding the Admin Console environment. This is your primary hub for configuring all your security policies. Before you get started, please ensure that you have completed the initial installation and that you have created your initial administrator account. 
+
+An important note to keep in mind: if no administrators have been created yet, you must complete the "Creating the first administrator" procedure to establish that root account before you can successfully log in to the console.
+
+To access the console, simply navigate to the base URL of your Keycloak instance and add a forward slash followed by "admin" to the address. When you reach the sign-in page, you will be prompted for authentication. If you are not a master-realm administrator, please ensure that an existing administrator has granted you the necessary privileges to manage the specific realms you need to work with.
+
+In production environments, you will often find Keycloak running behind a reverse proxy. To ensure the Admin Console remains reachable when it uses a different address than the public-facing hostname, you should use the `hostname-admin` configuration option. To set this via the command line interface, you would run the following command: `./kc.sh start --hostname-admin=admin.example.com`. This option, which takes a string value, allows you to define a specific address for the administration console, particularly when the management interface is exposed on a distinct network path or proxy.
+
+Now, let's walk through a guided exercise to help you explore and configure the Admin Console. 
+
+First, let's access the console. Open your web browser and navigate to the URL where your Keycloak instance is running, for example, `http://localhost:8080/admin`. Then, enter the credentials you established during your initial setup.
+
+Second, let's look at the realm menu. Notice the Master realm selector in the top-left corner. You can click this dropdown menu at any time to switch between your different isolated security environments. If you select "Create Realm," you can review the basic metadata required to set up a new environment, such as the realm name and display name.
+
+Third, let's explore the configuration modules. If you look at the sidebar, you will see two primary management areas. The "Manage" section contains your users, groups, roles, and clients, while the "Configure" section houses your realm settings, authentication flows, identity providers, and user federation.
+
+Finally, let's verify your administrative permissions. Navigate to "Users" in the sidebar and select your current administrative user account. From there, click on the "Role Mapping" tab to view the fine-grained permissions that are currently assigned to your account. If you need more information on managing these permissions, please refer to the Admin Console Access Control chapter in the official product documentation.
+
+Before we conclude, let’s briefly touch on troubleshooting common access issues. If you experience an authentication failure, first verify whether your account has been locked due to excessive failed attempts, or if your permissions have been revoked within the master realm. If you are able to log in but the page fails to load properly, it is often due to a reverse proxy configuration. In that case, double-check that your `hostname-admin` value matches the external URL provided by your load balancer or reverse proxy.

@@ -1,0 +1,9 @@
+Welcome to the Red Hat build of Keycloak Administration and Security course. This training is designed to provide you with a comprehensive understanding of managing and securing the Keycloak platform.
+
+Throughout this course, we will cover a range of essential topics to help you master the product. We will begin with an introduction to the Red Hat build of Keycloak, followed by the core processes for installation and configuration. We will then dive into the fundamental concepts of authentication and authorization, as well as identity brokering and user federation.
+
+Additionally, you will learn how to deploy and manage the Red Hat build of Keycloak on Red Hat OpenShift. We will also explore techniques for extending and templating Keycloak to meet your specific needs. The course will conclude with a comprehensive review to solidify your learning.
+
+Before we get started, please ensure you have the necessary background knowledge. This course assumes that you have the required prior experience or have completed the foundational courses as outlined in your program documentation. 
+
+Let's begin.

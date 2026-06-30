@@ -1,0 +1,41 @@
+In this guided exercise, you will learn how to connect your Red Hat build of Keycloak instance to an external user store. User federation is a powerful feature that allows you to offload user authentication and management to existing enterprise directories—such as LDAP or Active Directory—without needing to migrate your user data into the Keycloak database.
+
+Before we begin, ensure you have a running instance of Red Hat build of Keycloak version 26.6, administrative access to the Keycloak Admin Console, and connectivity to your LDAP or Active Directory server.
+
+### Task 1: Adding a User Federation Provider
+
+We will start by configuring Keycloak to communicate with your LDAP server to verify user credentials. 
+
+First, log in to the Keycloak Admin Console and select your target Realm from the dropdown menu in the top-left corner. In the left-hand navigation menu, select "User federation." Click the "Add user federation provider" button and choose "ldap" from the list of available providers.
+
+Under the "General Options" section, set the Console Display Name to `MyEnterpriseLDAP`. You will also want to ensure "Import Users" is set to `ON`. This setting creates a local copy of the user within Keycloak, which helps improve performance.
+
+Next, move to the "LDAP Connection Data" section. Enter the URL of your LDAP server, such as `ldap://ldap.example.com:389`. Provide the base Distinguished Name for your users, for example: `ou=users,dc=example,dc=com`. Finally, enter the "Bind DN" and "Bind Credential" to provide the necessary permissions for the service account that Keycloak will use to read your directory. Once finished, click "Save."
+
+### Task 2: Verifying Connection and Mapping
+
+Now that the provider is saved, we need to verify the connection and configure how attributes are mapped.
+
+First, click the "Test connection" button to confirm that your URL and bind credentials are correct. Then, click "Test authentication" to verify that your service account can successfully authenticate against the LDAP server.
+
+After confirming connectivity, navigate to the "Mappers" tab. You can either click "Add mapper" manually or use the "Create mappers from template" button. This will automatically map standard LDAP attributes, such as `mail`, `givenName`, and `sn`, to the corresponding user attributes within Keycloak.
+
+### Task 3: Testing User Login
+
+Now, let's verify that a user from your directory can authenticate through Keycloak.
+
+Open an incognito browser window and navigate to your application's login page or the Keycloak Account Console. Attempt to log in using the credentials of an existing user from your LDAP directory. 
+
+After a successful login, go back to the Keycloak Admin Console and click "Users" in the left-hand menu. Search for the user you just used to log in. You should see them appear in the list. Note the "Federation Link" attribute, which confirms that this user is being sourced from your LDAP provider.
+
+### Troubleshooting Tips
+
+If you encounter any issues during this process, keep these troubleshooting tips in mind:
+
+First, always check your server logs. If the connection fails, look for `LDAPException` or authentication failure messages in your Keycloak terminal.
+
+Second, verify your firewall settings. Ensure that the server running Red Hat build of Keycloak can reach your LDAP or Active Directory server on the correct port—usually port 389 for standard LDAP, or 636 for LDAPS.
+
+Finally, if your user profiles appear empty, re-examine the "Mappers" tab to ensure that the LDAP attribute names match your directory schema exactly.
+
+An important note regarding the "Import Users" feature: Keycloak caches user data. If you update a user's information in your LDAP directory, those changes may not reflect in Keycloak immediately. You may need to trigger a manual synchronization or wait for the configured sync interval defined in your federation provider settings.

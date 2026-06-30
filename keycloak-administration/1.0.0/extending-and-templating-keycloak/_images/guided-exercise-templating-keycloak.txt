@@ -1,0 +1,17 @@
+In this guided exercise, you will learn how to customize the look and feel of the Red Hat build of Keycloak by overriding its default themes. Keycloak utilizes a FreeMarker-based templating engine, which provides the flexibility to modify login pages, account management consoles, and email templates to align with your organization’s specific branding.
+
+Before we begin, ensure you have a running instance of Red Hat build of Keycloak version 26.6, access to the server’s file system, and a foundational understanding of HTML and CSS.
+
+Our first step is to locate the themes directory. Keycloak stores its default themes within the themes folder of your server installation. It is critical to remember that you should never modify these files directly, as your changes would be lost during server upgrades. Instead, we will create a custom theme directory. Navigate to your Keycloak installation path and create a new directory structure for your custom theme. You will need to create a folder named `my-company`, containing subdirectories for login, resources, CSS, and images.
+
+Next, we must create a theme configuration file. Keycloak requires a `theme.properties` file to recognize your new theme. Create this file within your `themes/my-company/login/` directory. Inside, add two lines to ensure your theme inherits from the default Keycloak base: specify `parent=base` and `import=common/keycloak`.
+
+In step three, we will override a template. To change the structure of the login page, you must copy the existing template from the base theme and modify it. Copy the `login.ftl` file from the base directory into your `my-company` login folder. Once copied, open the file in your preferred text editor to modify the header section, where you can add a custom welcome message or a reference to your company logo.
+
+Step four focuses on applying custom styles. You can override CSS files to adjust colors, fonts, and layouts. Start by creating a `styles.css` file in your `resources/css` directory. For example, you might add a rule to set the `background-color` of the body tag. After saving your CSS, be sure to update your `theme.properties` file to include your new stylesheet by adding the line `styles=css/styles.css`.
+
+Once the files are correctly in place, you must instruct Keycloak to use your new theme. Open the Admin Console and log in. Select your desired realm from the top-left dropdown menu, then navigate to Realm settings in the left-hand menu. Click on the Themes tab, select `my-company` from the Login theme dropdown, and click Save.
+
+Finally, let’s verify your changes. Open an Incognito or Private browser window and navigate to your login page. You should see your custom background color and any structural modifications you made to the template rendered correctly.
+
+If your changes do not appear as expected, keep in mind that if you are working in development mode, you should disable theme caching. You can do this by editing `conf/keycloak.conf` and setting `kc.cache.theme` to `off`. If the page fails to render entirely, check your server logs; any FreeMarker errors will be clearly indicated with specific line numbers to help you troubleshoot.
