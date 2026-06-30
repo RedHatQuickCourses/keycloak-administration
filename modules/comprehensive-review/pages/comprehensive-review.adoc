@@ -1,6 +1,8 @@
 #  Comprehensive Review
 
 = Comprehensive Review
+:page-audio-src: comprehensive-review.wav
+:page-transcript-src: comprehensive-review.txt
 
 The Comprehensive Review module serves as the final assessment of the Red Hat build of Keycloak training curriculum. It reinforces technical proficiency by consolidating core security concepts and practical configuration skills through the following activities:
 

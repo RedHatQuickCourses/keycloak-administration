@@ -1,6 +1,8 @@
 #  Overview of Red Hat build of Keycloak features
 
 = Overview of Red Hat build of Keycloak features
+:page-audio-src: overview-of-red-hat-build-of-keycloak-features.wav
+:page-transcript-src: overview-of-red-hat-build-of-keycloak-features.txt
 
 Red Hat build of Keycloak is an open-source identity and access management (IAM) solution designed for modern applications and services. It provides a centralized security layer that allows developers and administrators to secure their applications with minimal effort, eliminating the need to write custom authentication or authorization code.
 

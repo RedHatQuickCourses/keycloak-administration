@@ -1,6 +1,8 @@
 #  Guided Exercise: Install Red Hat build of Keycloak on Red Hat OpenShift
 
 = Guided Exercise: Install Red Hat build of Keycloak on Red Hat OpenShift
+:page-audio-src: guided-exercise-install-red-hat-build-of-keycloak-on-red-hat-openshift.wav
+:page-transcript-src: guided-exercise-install-red-hat-build-of-keycloak-on-red-hat-openshift.txt
 
 In this exercise, you will deploy the Red Hat build of Keycloak on an existing Red Hat OpenShift cluster. We will utilize the Keycloak Operator, which is the recommended approach for managing Keycloak instances in a containerized environment to ensure automated lifecycle management.
 

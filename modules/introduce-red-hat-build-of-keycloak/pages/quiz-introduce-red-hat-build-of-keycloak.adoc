@@ -1,6 +1,8 @@
 #  Quiz: Introduce Red Hat build of Keycloak
 
 = Quiz: Introduce Red Hat build of Keycloak
+:page-audio-src: quiz-introduce-red-hat-build-of-keycloak.wav
+:page-transcript-src: quiz-introduce-red-hat-build-of-keycloak.txt
 
 Test your knowledge of the fundamental concepts and architectural pillars of Red Hat build of Keycloak.
 

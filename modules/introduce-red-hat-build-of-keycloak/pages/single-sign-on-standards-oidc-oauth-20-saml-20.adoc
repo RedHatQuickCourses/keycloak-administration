@@ -1,6 +1,8 @@
 #  Single Sign-On standards (OIDC, OAuth 2.0, SAML 2.0)
 
 = Single Sign-On standards (OIDC, OAuth 2.0, SAML 2.0)
+:page-audio-src: single-sign-on-standards-oidc-oauth-20-saml-20.wav
+:page-transcript-src: single-sign-on-standards-oidc-oauth-20-saml-20.txt
 
 In the Red Hat build of Keycloak, enabling Single Sign-On (SSO) relies on standardized protocols that allow applications to delegate authentication to a centralized server. Understanding the distinctions between these protocols is critical for architecting secure applications.
 

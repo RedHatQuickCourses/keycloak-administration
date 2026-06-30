@@ -1,6 +1,8 @@
 #  Admin Console exploration and configuration
 
 = Admin Console exploration and configuration
+:page-audio-src: admin-console-exploration-and-configuration.wav
+:page-transcript-src: admin-console-exploration-and-configuration.txt
 
 The Red Hat build of Keycloak Admin Console provides a centralized web-based user interface for managing all aspects of your identity and access management system. From this interface, administrators can manage realms, users, clients, identity providers, and authentication flows.
 

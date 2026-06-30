@@ -1,6 +1,8 @@
 #  Development mode installation requirements
 
 = Development mode installation requirements
+:page-audio-src: development-mode-installation-requirements.wav
+:page-transcript-src: development-mode-installation-requirements.txt
 
 Red Hat build of Keycloak provides a "development mode" specifically designed for rapid prototyping, theme development, and initial exploration. This mode prioritizes ease of use and immediate feedback by relaxing several security and performance constraints required for production environments.
 

@@ -1,6 +1,8 @@
 #  Identity Brokering and User Federation
 
 = Identity Brokering and User Federation
+:page-audio-src: identity-brokering-and-user-federation.wav
+:page-transcript-src: identity-brokering-and-user-federation.txt
 
 Identity Brokering and User Federation in Red Hat build of Keycloak allow organizations to centralize authentication by integrating with external identity sources.
 

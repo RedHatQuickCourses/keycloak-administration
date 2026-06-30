@@ -1,6 +1,8 @@
 #  Extending Keycloak functionality
 
 = Extending Red Hat build of Keycloak Functionality
+:page-audio-src: extending-keycloak-functionality.wav
+:page-transcript-src: extending-keycloak-functionality.txt
 
 Red Hat build of Keycloak is designed with a modular architecture that allows developers to extend its core capabilities to meet specific business requirements. While the platform provides comprehensive built-in features, such as predefined authentication flows (refer to section 8.3.1), certain advanced use cases may require custom logic.
 

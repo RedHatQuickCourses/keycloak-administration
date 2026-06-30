@@ -1,4 +1,6 @@
 =  Red Hat build of Keycloak Administration and Security
+:page-audio-src: index.wav
+:page-transcript-src: index.txt
 :navtitle: Home
 
 == Introduction

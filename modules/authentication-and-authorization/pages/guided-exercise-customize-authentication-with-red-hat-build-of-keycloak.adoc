@@ -1,6 +1,8 @@
 #  Guided Exercise: Customize authentication with Red Hat build of Keycloak
 
 = Guided Exercise: Customize authentication with Red Hat build of Keycloak
+:page-audio-src: guided-exercise-customize-authentication-with-red-hat-build-of-keycloak.wav
+:page-transcript-src: guided-exercise-customize-authentication-with-red-hat-build-of-keycloak.txt
 
 In this exercise, you will customize the authentication flow in Red Hat build of Keycloak 26.6. By modifying authentication flows, you can move beyond simple username/password logins and enforce stronger security postures, such as requiring Multi-Factor Authentication (MFA) for specific client applications.
 

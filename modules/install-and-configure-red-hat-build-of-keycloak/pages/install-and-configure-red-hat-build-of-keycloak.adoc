@@ -1,6 +1,8 @@
 #  Install and Configure Red Hat build of Keycloak
 
 = Install and Configure Red Hat build of Keycloak
+:page-audio-src: install-and-configure-red-hat-build-of-keycloak.wav
+:page-transcript-src: install-and-configure-red-hat-build-of-keycloak.txt
 
 Installing and configuring the Red Hat build of Keycloak involves setting up the server environment, accessing the administrative interfaces, and defining initial security parameters.
 

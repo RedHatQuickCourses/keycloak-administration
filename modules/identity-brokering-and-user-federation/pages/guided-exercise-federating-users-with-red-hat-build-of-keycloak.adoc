@@ -1,6 +1,8 @@
 #  Guided Exercise: Federating Users with Red Hat build of Keycloak
 
 = Guided Exercise: Federating Users with Red Hat build of Keycloak
+:page-audio-src: guided-exercise-federating-users-with-red-hat-build-of-keycloak.wav
+:page-transcript-src: guided-exercise-federating-users-with-red-hat-build-of-keycloak.txt
 
 In this exercise, you will connect your Red Hat build of Keycloak instance to an external user store. User federation allows you to offload user authentication and management to existing enterprise directories, such as LDAP or Active Directory, without migrating your user data into the Keycloak database.
 

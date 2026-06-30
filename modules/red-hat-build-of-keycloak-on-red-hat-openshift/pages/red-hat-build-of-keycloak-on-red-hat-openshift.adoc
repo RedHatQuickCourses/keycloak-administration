@@ -1,6 +1,8 @@
 #  Red Hat build of Keycloak on Red Hat OpenShift
 
 = Red Hat build of Keycloak on Red Hat OpenShift
+:page-audio-src: red-hat-build-of-keycloak-on-red-hat-openshift.wav
+:page-transcript-src: red-hat-build-of-keycloak-on-red-hat-openshift.txt
 
 Red Hat build of Keycloak (RHBK) is designed to run efficiently in containerized environments, providing robust identity and access management for applications deployed on Red Hat OpenShift.
 

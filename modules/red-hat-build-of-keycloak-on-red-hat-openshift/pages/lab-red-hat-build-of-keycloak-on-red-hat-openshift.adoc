@@ -1,6 +1,8 @@
 #  Lab: Red Hat build of Keycloak on Red Hat OpenShift
 
 = Lab: Red Hat build of Keycloak on Red Hat OpenShift
+:page-audio-src: lab-red-hat-build-of-keycloak-on-red-hat-openshift.wav
+:page-transcript-src: lab-red-hat-build-of-keycloak-on-red-hat-openshift.txt
 
 In this lab, you will deploy the Red Hat build of Keycloak (RHBK) on a Red Hat OpenShift Container Platform cluster. You will utilize the Keycloak Operator to manage the lifecycle of your Keycloak instance.
 

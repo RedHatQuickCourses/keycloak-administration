@@ -1,6 +1,8 @@
 #  Guided Exercise: Explore and Configure the Admin Console
 
 = Guided Exercise: Explore and Configure the Admin Console
+:page-audio-src: guided-exercise-explore-and-configure-the-admin-console.wav
+:page-transcript-src: guided-exercise-explore-and-configure-the-admin-console.txt
 
 In this exercise, you will navigate the Red Hat build of Keycloak Admin Console. The Admin Console is the centralized web-based interface used to manage realms, clients, users, and security policies.
 

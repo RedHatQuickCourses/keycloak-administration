@@ -1,6 +1,8 @@
 #  Lab: Install Red Hat build of Keycloak
 
 = Lab: Install Red Hat build of Keycloak
+:page-audio-src: lab-install-red-hat-build-of-keycloak.wav
+:page-transcript-src: lab-install-red-hat-build-of-keycloak.txt
 
 In this lab, you will perform a containerized deployment of the Red Hat build of Keycloak in development mode. This environment is intended for learning, experimentation, and initial configuration exploration.
 

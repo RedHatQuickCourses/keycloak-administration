@@ -1,6 +1,8 @@
 #  Guided Exercise: Red Hat build of Keycloak Admin CLI
 
 = Guided Exercise: Red Hat build of Keycloak Admin CLI
+:page-audio-src: guided-exercise-red-hat-build-of-keycloak-admin-cli.wav
+:page-transcript-src: guided-exercise-red-hat-build-of-keycloak-admin-cli.txt
 
 In this exercise, you will interact with the Red Hat build of Keycloak using the `kcadm.sh` (or `kcadm.bat`) Admin CLI tool. The Admin CLI is a powerful utility that allows you to perform administrative tasks, such as creating realms, managing users, and updating configurations, directly from the terminal.
 

@@ -1,6 +1,8 @@
 #  Guided Exercise: Authorize Users with Red Hat build of Keycloak
 
 = Guided Exercise: Authorize Users with Red Hat build of Keycloak
+:page-audio-src: guided-exercise-authorize-users-with-red-hat-build-of-keycloak.wav
+:page-transcript-src: guided-exercise-authorize-users-with-red-hat-build-of-keycloak.txt
 
 In this exercise, you will implement role-based access control (RBAC) to manage user permissions within the Red Hat build of Keycloak. You will define application-specific roles and map them to users to ensure secure authorization.
 

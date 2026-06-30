@@ -1,6 +1,8 @@
 #  Quiz: Describe Keycloak Systems
 
 = Quiz: Describe Keycloak Systems
+:page-audio-src: quiz-describe-keycloak-systems.wav
+:page-transcript-src: quiz-describe-keycloak-systems.txt
 
 Test your understanding of the core architectural concepts and the foundational role of the Red Hat build of Keycloak in modern identity and access management (IAM) environments.
 

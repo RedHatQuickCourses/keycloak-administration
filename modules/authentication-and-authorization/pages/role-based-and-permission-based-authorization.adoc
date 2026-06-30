@@ -1,6 +1,8 @@
 #  Role-based and permission-based authorization
 
 = Role-based and permission-based authorization
+:page-audio-src: role-based-and-permission-based-authorization.wav
+:page-transcript-src: role-based-and-permission-based-authorization.txt
 
 In the Red Hat build of Keycloak, managing access control is a fundamental security requirement. To simplify the complexity of managing permissions for thousands of individual users, Keycloak utilizes **Role-Based Access Control (RBAC)**.
 

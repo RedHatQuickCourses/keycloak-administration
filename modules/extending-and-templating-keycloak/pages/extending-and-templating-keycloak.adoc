@@ -1,6 +1,8 @@
 #  Extending and Templating Keycloak
 
 = Extending and Templating Keycloak
+:page-audio-src: extending-and-templating-keycloak.wav
+:page-transcript-src: extending-and-templating-keycloak.txt
 
 Red Hat build of Keycloak provides flexibility to customize and extend core functionality to meet specific application and branding requirements:
 

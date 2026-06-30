@@ -1,6 +1,8 @@
 #  Delegating authentication to third-party identity providers
 
 = Delegating Authentication to Third-Party Identity Providers
+:page-audio-src: delegating-authentication-to-third-party-identity-providers.wav
+:page-transcript-src: delegating-authentication-to-third-party-identity-providers.txt
 
 == Overview
 Delegating authentication allows your applications to offload the responsibility of verifying user credentials to an external system. Within the Red Hat build of Keycloak, this is facilitated through the **Identity Broker** component. 

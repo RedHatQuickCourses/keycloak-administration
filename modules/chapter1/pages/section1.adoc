@@ -1,4 +1,6 @@
 = Section 1
+:page-audio-src: section1.wav
+:page-transcript-src: section1.txt
 :page-audio-src: audio-file.wav
 :page-transcript-src: sample-transcript.json
 

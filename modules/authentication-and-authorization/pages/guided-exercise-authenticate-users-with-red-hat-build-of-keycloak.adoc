@@ -1,6 +1,8 @@
 #  Guided Exercise: Authenticate Users with Red Hat build of Keycloak
 
 = Guided Exercise: Authenticate Users with Red Hat build of Keycloak
+:page-audio-src: guided-exercise-authenticate-users-with-red-hat-build-of-keycloak.wav
+:page-transcript-src: guided-exercise-authenticate-users-with-red-hat-build-of-keycloak.txt
 
 In this exercise, you will configure a basic authentication flow to verify user identity against the Red Hat build of Keycloak internal user database. We will define a realm, create a user, and test the authentication process using the Admin Console.
 

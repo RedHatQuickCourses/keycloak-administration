@@ -1,6 +1,8 @@
 #  Customizing authentication sessions
 
 = Customizing Authentication Sessions
+:page-audio-src: customizing-authentication-sessions.wav
+:page-transcript-src: customizing-authentication-sessions.txt
 
 In Red Hat build of Keycloak, authentication sessions act as the "memory" of a login process, while user sessions represent the established trust once the user is successfully authenticated. Customizing these sessions is critical for balancing user convenience with security requirements.
 

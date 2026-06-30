@@ -1,6 +1,8 @@
 #  Guided Exercise: Red Hat build of Keycloak Installation
 
 = Guided Exercise: Red Hat build of Keycloak Installation
+:page-audio-src: guided-exercise-red-hat-build-of-keycloak-installation.wav
+:page-transcript-src: guided-exercise-red-hat-build-of-keycloak-installation.txt
 
 In this exercise, you will perform a development mode installation of the Red Hat build of Keycloak. This process establishes the foundational environment required to begin exploring the Admin Console and identity management capabilities.
 

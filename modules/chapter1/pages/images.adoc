@@ -1,4 +1,6 @@
 = Images
+:page-audio-src: images.wav
+:page-transcript-src: images.txt
 
 This page demonstrates images, audio, and video stored in `modules/chapter1/images/`.
 The *estimated time* shown below the title includes reading time for the text on this page plus the duration of embedded audio and video.

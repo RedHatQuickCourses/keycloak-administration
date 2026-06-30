@@ -1,6 +1,8 @@
 #  LDAP and Active Directory integration
 
 = LDAP and Active Directory Integration
+:page-audio-src: ldap-and-active-directory-integration.wav
+:page-transcript-src: ldap-and-active-directory-integration.txt
 
 Red Hat build of Keycloak provides robust support for integrating existing directory services, allowing organizations to centralize identity management. By leveraging LDAP (Lightweight Directory Access Protocol) and Microsoft Active Directory (MSAD), you can delegate user authentication and attribute synchronization to your existing enterprise infrastructure.
 

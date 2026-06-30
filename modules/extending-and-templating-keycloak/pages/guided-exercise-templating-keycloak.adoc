@@ -1,6 +1,8 @@
 #  Guided Exercise: Templating Keycloak
 
 = Guided Exercise: Templating Keycloak
+:page-audio-src: guided-exercise-templating-keycloak.wav
+:page-transcript-src: guided-exercise-templating-keycloak.txt
 
 In this exercise, you will customize the look and feel of the Red Hat build of Keycloak by overriding the default themes. Keycloak uses a FreeMarker-based templating engine that allows you to modify login pages, account management consoles, and email templates to match your organization’s branding.
 

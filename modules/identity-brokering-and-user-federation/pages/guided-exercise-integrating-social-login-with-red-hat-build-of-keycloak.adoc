@@ -1,6 +1,8 @@
 #  Guided Exercise: Integrating Social Login with Red Hat build of Keycloak
 
 = Guided Exercise: Integrating Social Login with Red Hat build of Keycloak
+:page-audio-src: guided-exercise-integrating-social-login-with-red-hat-build-of-keycloak.wav
+:page-transcript-src: guided-exercise-integrating-social-login-with-red-hat-build-of-keycloak.txt
 
 In this exercise, you will configure Red Hat build of Keycloak to allow users to authenticate using an external social identity provider (IdP). By offloading authentication to providers like Google or GitHub, you reduce the burden of password management and improve the user experience.
 

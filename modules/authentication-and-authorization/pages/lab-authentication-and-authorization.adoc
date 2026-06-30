@@ -1,6 +1,8 @@
 #  Lab: Authentication and Authorization
 
 = Lab: Authentication and Authorization
+:page-audio-src: lab-authentication-and-authorization.wav
+:page-transcript-src: lab-authentication-and-authorization.txt
 
 In this lab, you will implement secure access control by configuring authentication flows and enforcing authorization policies within the Red Hat build of Keycloak. You will transition from basic user authentication to granular permission-based access control.
 

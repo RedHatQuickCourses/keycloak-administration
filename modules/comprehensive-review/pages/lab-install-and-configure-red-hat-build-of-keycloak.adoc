@@ -1,6 +1,8 @@
 #  Lab: Install and Configure Red Hat build of Keycloak
 
 = Lab: Install and Configure Red Hat build of Keycloak
+:page-audio-src: lab-install-and-configure-red-hat-build-of-keycloak.wav
+:page-transcript-src: lab-install-and-configure-red-hat-build-of-keycloak.txt
 
 This lab focuses on setting up a Red Hat build of Keycloak instance for development and testing purposes. You will use `podman` to deploy a containerized instance and perform initial configuration via the Admin Console.
 

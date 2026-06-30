@@ -1,6 +1,8 @@
 #  Review of key security concepts and configurations
 
 = Review of key security concepts and configurations
+:page-audio-src: review-of-key-security-concepts-and-configurations.wav
+:page-transcript-src: review-of-key-security-concepts-and-configurations.txt
 
 This section provides a summary of the fundamental security concepts and administrative configurations required to maintain a hardened Red Hat build of Keycloak environment.
 

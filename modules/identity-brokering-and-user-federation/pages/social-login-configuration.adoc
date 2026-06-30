@@ -1,6 +1,8 @@
 #  Social login configuration
 
 = Social Login Configuration
+:page-audio-src: social-login-configuration.wav
+:page-transcript-src: social-login-configuration.txt
 
 In modern identity management, users increasingly prefer the convenience of using existing identities to access new applications. Red Hat build of Keycloak simplifies this by acting as an Identity Broker, allowing you to delegate authentication to trusted third-party social networks.
 

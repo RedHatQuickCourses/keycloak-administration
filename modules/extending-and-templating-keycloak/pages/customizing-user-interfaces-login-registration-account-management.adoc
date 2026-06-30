@@ -1,6 +1,8 @@
 #  Customizing user interfaces (Login, Registration, Account Management)
 
 = Customizing user interfaces (Login, Registration, Account Management)
+:page-audio-src: customizing-user-interfaces-login-registration-account-management.wav
+:page-transcript-src: customizing-user-interfaces-login-registration-account-management.txt
 
 In the Red Hat build of Keycloak, themes define the look and feel of the user-facing pages. Customization allows organizations to align the authentication experience with their brand identity while maintaining a secure and consistent user journey across login, registration, and account management portals.
 

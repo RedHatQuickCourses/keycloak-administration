@@ -1,6 +1,8 @@
 #  Guided Exercise: Configure Red Hat build of Keycloak on Red Hat OpenShift
 
 = Guided Exercise: Configure Red Hat build of Keycloak on Red Hat OpenShift
+:page-audio-src: guided-exercise-configure-red-hat-build-of-keycloak-on-red-hat-openshift.wav
+:page-transcript-src: guided-exercise-configure-red-hat-build-of-keycloak-on-red-hat-openshift.txt
 
 This exercise guides you through the post-deployment configuration of the Red Hat build of Keycloak on an OpenShift cluster. After deploying the operator and the Keycloak custom resource, you must ensure the environment is optimized for secure production-like operations.
 

@@ -1,6 +1,8 @@
 #  Lab: Identity Brokering and User Federation
 
 = Lab: Identity Brokering and User Federation
+:page-audio-src: lab-identity-brokering-and-user-federation.wav
+:page-transcript-src: lab-identity-brokering-and-user-federation.txt
 
 In this lab, you will configure Red Hat build of Keycloak to act as an Identity Broker. You will integrate an external Identity Provider (IdP) to allow users to authenticate using credentials from an external source, and map the incoming identity information to your local realm.
 

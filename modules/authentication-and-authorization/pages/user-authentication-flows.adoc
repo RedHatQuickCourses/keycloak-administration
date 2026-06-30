@@ -1,6 +1,8 @@
 #  User authentication flows
 
 = User authentication flows
+:page-audio-src: user-authentication-flows.wav
+:page-transcript-src: user-authentication-flows.txt
 
 Red Hat build of Keycloak provides a flexible and powerful mechanism for managing how users interact with the system through **Authentication Flows**. An authentication flow serves as a container for authentications, screens, and actions that occur during critical lifecycle events such as login, user registration, and credential recovery.
 

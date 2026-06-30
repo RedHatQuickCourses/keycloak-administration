@@ -1,4 +1,6 @@
 = Collapsible blocks
+:page-audio-src: collapsible-demo.wav
+:page-transcript-src: collapsible-demo.txt
 
 This page demonstrates https://docs.asciidoctor.org/asciidoc/latest/blocks/collapsible/[collapsible example blocks^] in Antora: use them for optional *Hints*, *Deep dives*, or other detail that should not block the main lesson flow.
 

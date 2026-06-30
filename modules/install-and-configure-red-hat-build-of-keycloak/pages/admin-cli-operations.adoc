@@ -1,6 +1,8 @@
 #  Admin CLI operations
 
 = Admin CLI operations
+:page-audio-src: admin-cli-operations.wav
+:page-transcript-src: admin-cli-operations.txt
 
 The Red Hat build of Keycloak provides a powerful command-line interface (CLI) that allows administrators to automate tasks, manage resources, and perform administrative operations without interacting with the graphical Admin Console. This approach is essential for DevOps pipelines, bulk configuration management, and scripting repetitive tasks.
 

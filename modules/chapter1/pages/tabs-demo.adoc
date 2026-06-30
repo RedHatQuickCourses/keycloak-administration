@@ -1,4 +1,6 @@
 = Tabbed code blocks
+:page-audio-src: tabs-demo.wav
+:page-transcript-src: tabs-demo.txt
 
 This page demonstrates https://github.com/asciidoctor/asciidoctor-tabs[`@asciidoctor/tabs`^] in Antora: use tabs for multiple languages, or to separate exercise instructions from solutions.
 

@@ -1,6 +1,8 @@
 #  Deploying Keycloak in containerized environments
 
 = Deploying Red Hat build of Keycloak in Containerized Environments
+:page-audio-src: deploying-keycloak-in-containerized-environments.wav
+:page-transcript-src: deploying-keycloak-in-containerized-environments.txt
 
 In modern architecture, the Red Hat build of Keycloak is designed to run as an immutable container. Containerization allows for consistent deployment across environments—from local development to large-scale production clusters.
 

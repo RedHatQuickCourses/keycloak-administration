@@ -1,6 +1,8 @@
 #  Architecture and operational concepts
 
 = Architecture and Operational Concepts
+:page-audio-src: architecture-and-operational-concepts.wav
+:page-transcript-src: architecture-and-operational-concepts.txt
 
 Red Hat build of Keycloak is designed as a high-performance, identity and access management solution that decouples application security logic from the application code itself. By leveraging standard protocols, it acts as an Identity Provider (IdP) that centralizes the management of user identities, roles, and permissions.
 

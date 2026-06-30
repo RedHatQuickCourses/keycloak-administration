@@ -1,6 +1,8 @@
 #  Configuration and management on OpenShift
 
 = Configuration and Management on Red Hat build of Keycloak on OpenShift
+:page-audio-src: configuration-and-management-on-openshift.wav
+:page-transcript-src: configuration-and-management-on-openshift.txt
 
 When deploying the Red Hat build of Keycloak on OpenShift, configuration and management move away from traditional file-based editing to a declarative, container-native approach. This section covers the essential mechanisms for managing your Keycloak instance within an OpenShift environment.
 
