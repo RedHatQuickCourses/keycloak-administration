@@ -1,0 +1,18 @@
+In the Red Hat build of Keycloak, understanding how to manage authentication sessions is a fundamental skill for balancing user convenience with robust security. In this lesson, we will explore the session architecture, learn how to configure session lifespans, and customize authentication flows.
+
+To get started, let’s look at the session architecture. It is essential to distinguish between the two primary session states. First, we have authentication sessions, which track the transient state of an active login flow. This is the mechanism the server uses to remember exactly which step of the authentication process the user is currently performing. Second, we have user sessions, which are created once authentication is successful. These sessions track the active user and facilitate Single Sign-On, or SSO, ensuring that users don't need to re-authenticate when moving between different applications. Within these user sessions, you will also find client sessions, which are a subset that tracks the user’s state on a per-application basis.
+
+Next, let's discuss configuring session lifespans. Keycloak provides granular control over how long these sessions persist, which is a key strategy for mitigating the risk of session hijacking and meeting compliance requirements. 
+
+However, keep in mind an important caution: session data is stored in the database by default and cached in the `sessions` and `clientSessions` caches for performance. Because of this, setting excessively long session lifetimes can lead to increased memory pressure on your Infinispan clusters, so choose your timing carefully.
+
+To adjust these settings, follow this procedure: 
+First, log in to the Admin Console. Select your desired Realm from the top-left dropdown menu. From the left navigation menu, click Realm settings, then navigate to the Sessions tab. Here, you can configure four key settings. SSO Session Idle determines how long a session lasts if there is no activity. SSO Session Max sets the absolute maximum time a session can remain active. Similarly, Client Session Idle and Client Session Max control the expiration for specific application-based sessions. Once you have entered your desired values, click Save.
+
+Beyond simple lifespans, you can also customize the authentication experience by modifying authentication flows. If you navigate to Authentication in the left menu, you can define how sessions are initiated and validated. Browser Flows customize how users interact with the login page, while Direct Grant Flows handle how programmatic, non-browser clients manage session creation.
+
+If your security policy requires users to re-authenticate, you can force this by modifying your flows. Navigate to Authentication, then Flows, and select your Browser flow. Using the Actions menu—represented by the three dots—select Copy, and name your new flow `Custom-Secure-Browser-Flow`. You can then add an execution of type Re-authentication to this flow. To activate it, bind this new flow to the Browser Flow setting found under Realm Settings and then the Authentication tab.
+
+To wrap up, let's walk through a common scenario where your security team requires that all user sessions be terminated after 30 minutes of inactivity, with a hard limit of 8 hours for any session.
+
+To implement this, navigate to Realm Settings, and select the Sessions tab. Set the SSO Session Idle value to 30 minutes, and the SSO Session Max value to 8 hours. Once saved, users who step away from their desks for more than 30 minutes will be prompted to log in again upon returning to any protected application. You can verify these changes by logging in as a test user and monitoring the active sessions count in the Sessions tab found under the Users menu.

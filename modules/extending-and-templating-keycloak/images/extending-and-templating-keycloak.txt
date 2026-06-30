@@ -1,0 +1,7 @@
+The Red Hat build of Keycloak offers significant flexibility, allowing you to customize and extend its core functionality to meet your specific application needs and branding requirements. There are three primary areas where you can apply these customizations.
+
+First, you can perform UI customization. This allows you to modify login, registration, and account management templates to ensure the user experience aligns perfectly with your organizational branding and design standards.
+
+Second, for more advanced integration, you can develop custom adapters. By implementing the `KeycloakAdapter` interface, your developers can create custom logic tailored to your specific authentication and session management requirements.
+
+Finally, you can customize your authentication flows. While the built-in authentication flows themselves are immutable, you have the ability to alter their specific requirements and execution logic to satisfy your unique security or business policies.

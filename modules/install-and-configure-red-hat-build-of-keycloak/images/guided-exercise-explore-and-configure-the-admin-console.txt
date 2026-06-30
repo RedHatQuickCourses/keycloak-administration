@@ -1,0 +1,19 @@
+In this guided exercise, you will learn how to navigate and configure the Red Hat build of Keycloak Admin Console. This centralized, web-based interface is your primary tool for managing realms, clients, users, and security policies.
+
+Before we begin, ensure that your Red Hat build of Keycloak is installed and running, and that you have already created your initial administrator account. If you haven't initialized the system yet, please refer to the "Creating the first administrator" section of the documentation.
+
+By the end of this session, you will be able to access and authenticate to the Admin Console, navigate the primary menu, inspect realm configurations, and understand the scope of administrative permissions.
+
+Let’s start with the first step: accessing the Admin Console. Open your web browser and navigate to the base URL of your Keycloak instance—typically `http://localhost:8080`. From the landing page, click the link labeled "Administration Console." You will then be prompted to authenticate using the credentials for your initial administrator account.
+
+Once you are logged in, you will arrive at the Dashboard. This screen provides a high-level overview of the currently selected realm. To navigate the interface, use the Realm Selector located in the top-left corner to switch between the master realm and any other realms you have created. On the left, you will find the main navigation menu, which organizes administrative tasks into three main categories: "Configure," for managing realms, clients, and authentication flows; "Manage," for performing operations on users, groups, and sessions; and "Events," for monitoring system-wide activity.
+
+Now, let's inspect the Realm settings. Click "Realm settings" in the left sidebar. You will see several tabs across the top. The "General" tab shows basic realm information. The "Login" tab allows you to configure registration and password recovery workflows. Use the "Themes" tab to manage the visual appearance of your login pages, and the "Tokens" tab to configure settings for OIDC and SAML token lifespans and signatures.
+
+Managing administrative access is critical for system security. To review your own access, navigate to the "Users" section in the left sidebar and select your administrator account. Click on the "Role mapping" tab to verify your assigned roles. You should see the `realm-admin` role, which is required to manage the configurations we just explored.
+
+A useful tip here: if you need to delegate administration to others, navigate to "Manage," select "Users" to create a new user, and then assign the necessary administrative roles via the "Role mapping" tab. For more information on granular access control, please consult the "Admin Console Access Control" documentation.
+
+To verify your environment is configured correctly, try creating a test user under the master realm. If you are successful, go to the "User list" to confirm the user appears there. Also, test the Realm Selector in the top-left corner to ensure you can toggle between the master realm and any custom realms you may have created.
+
+If you run into any issues, keep these troubleshooting points in mind. If you encounter an "Access Denied" error or find that menu items are missing, ensure your account has the necessary realm-level roles assigned. You may need to log in with your initial super-administrator account to audit those permissions. Additionally, if you cannot see the "Manage" menu, verify that you have a realm selected in the Realm Selector. If the selector says "Select a realm," the system will not display the full suite of management options.

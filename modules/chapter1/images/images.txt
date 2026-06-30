@@ -1,0 +1,11 @@
+Welcome to this lesson on managing media files, including images, audio, and video, within your training modules.
+
+All media assets for your course, such as images, audio files, and video clips, should be stored in the directory located at modules/chapter1/images/. When you are working on your content, the estimated time displayed below the page title is automatically calculated. This includes both the time required to read the text on the page and the total duration of any embedded audio or video files.
+
+To include these assets in your training, simply copy your media files into the appropriate folder for your chapter—using the structure modules/chapterN/images/—and reference them using the standard media macros. One of the great benefits of using local files is that the system automatically detects their duration, so no additional configuration is required.
+
+If you are using images, simply reference them by their filename. For audio or video, you can use the audio or video macros to embed your files directly, ensuring they are accessible to your learners.
+
+Now, there may be times when your audio or video content is hosted externally, such as on a website, or embedded from platforms like YouTube or Vimeo. In these cases, the browser may not be able to automatically determine the duration of the media. To ensure your estimated completion time remains accurate, you can manually set the length of the clip in seconds by using the role attribute within your macro. For example, if you are embedding an external audio file, you can specify the duration by adding the role attribute with the value media-seconds, followed by the specific time. This same pattern applies when embedding videos from YouTube or Vimeo.
+
+Finally, if you have a long audio clip but only want to play a specific portion, you can use the end attribute to define the playback end point. By setting this to a specific number of seconds, the system will calculate the duration starting from the beginning of the clip up to that point. This gives you precise control over your media presentation while keeping your course duration tracking accurate.

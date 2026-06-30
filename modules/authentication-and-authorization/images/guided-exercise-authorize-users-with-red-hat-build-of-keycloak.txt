@@ -1,0 +1,15 @@
+In this guided exercise, you will learn how to implement role-based access control—often referred to as RBAC—to manage user permissions within the Red Hat build of Keycloak. By the end of this session, you will know how to define application-specific roles and map them to users to ensure secure authorization.
+
+Before we begin, ensure you have a running instance of the Red Hat build of Keycloak, an existing realm with a test user account, and administrative access to the Keycloak Admin Console.
+
+First, let’s create a realm role. Realm roles are global, meaning they can be assigned to any user within your realm. To get started, log in to the Keycloak Admin Console and select your target realm from the dropdown menu in the top-left corner. From the left-hand navigation menu, click on "Realm roles," then click "Create role." In the "Role name" field, type the word "manager" and click "Save."
+
+Now that the role is created, the next step is to assign it to a user. Go to the "Users" section in the left menu and select the specific user account you want to update. Click on the "Role mapping" tab, then select "Assign role." Use the filter to search for the "manager" role, select it, and click "Assign." Once complete, that user will carry the "manager" authority claim within their security token.
+
+To confirm that the authorization is working correctly, you should verify it via a token. When a user authenticates, Keycloak includes their roles in the ID or access token. You can verify this by using a client application or the built-in "Clients" evaluation tool in Keycloak to perform a login flow for the user. When you inspect the decoded JSON Web Token, look for the "realm_access" claim. You should see "manager" listed among the roles in that section.
+
+To apply this authorization in a real-world scenario, you will need to protect a resource. Navigate to your "Clients" and select the application you wish to secure. Go to the "Authorization" tab, and make sure that authorization is enabled for that client. From there, create a new policy based on the "manager" role by selecting "Role" as the policy type and adding the "manager" role we created earlier. Next, create a permission that links your specific resource to that "manager" policy. 
+
+To test that this is working as expected, attempt to access the protected resource using a user account that does *not* have the "manager" role. You should find that Keycloak or your integrated application returns a 403 Forbidden response.
+
+Finally, keep a few troubleshooting tips in mind. First, be aware of caching; if you modify a user’s role while they have an active session, those changes might not take effect until the user re-authenticates or their current token expires. Second, if you cannot see the role in your JWT, double-check your client scopes and ensure that the "realm_access" claim is included in the client's token mapper settings.

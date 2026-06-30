@@ -1,0 +1,21 @@
+In this section, we will review the fundamental security concepts and administrative configurations required to maintain a hardened Red Hat build of Keycloak environment.
+
+To effectively secure your applications, it is essential to understand the interaction between identity standards and the server's architectural components. Keycloak acts as a robust Identity Provider by supporting three primary identity protocols. First is OpenID Connect, an identity layer built on OAuth 2.0, which allows clients to verify end-user identity. Second is OAuth 2.0 itself, the industry-standard protocol for authorization. And finally, Keycloak supports SAML 2.0 for exchanging authentication and authorization data in XML format.
+
+Beyond these protocols, Keycloak provides two critical security benefits. It offers credential isolation, ensuring user credentials remain within the Identity Provider rather than being handled directly by your applications. Additionally, it uses a system of short-lived access, refresh, and ID tokens to facilitate secure communication between the client, the server, and your protected resources.
+
+When deploying or auditing your Keycloak environment, there are four primary areas that require your attention. Regarding realms, you should ensure that each application or department is isolated within its own realm to enforce a proper separation of duties. When managing authentication flows, review both browser and direct grant flows, and be sure to implement multi-factor authentication for all high-privilege accounts. 
+
+In terms of client settings, always use strict redirect URIs and never use wildcards in production environments. Furthermore, you should prefer the "Standard Flow" over the "Implicit Flow" for all modern applications. Lastly, when using User Federation to sync with LDAP or Active Directory, you must ensure that the connection is secured via LDAPS to protect credentials while they are in transit.
+
+Now, let's move on to our lab activity, where you will perform a comprehensive security audit of a pre-configured environment.
+
+First, audit your token lifespans. Log in to the Admin Console, navigate to Realm Settings, and select the Tokens tab. Review the Access Token Lifespan setting; it should be set to a short, reasonable duration, such as five minutes, to minimize risk if a token is ever intercepted.
+
+Second, verify your client configurations. Navigate to the Clients section and select your specific client. Verify that the Valid Redirect URIs contain specific, explicit entries rather than wildcards. Additionally, ensure that Client Authentication is enabled if your client is capable of keeping a secret.
+
+Third, review your authentication policies. Go to the Authentication menu and select Policies. If you are using an external user federation like LDAP, ensure that User Registration is disabled to prevent the creation of unauthorized local accounts.
+
+Finally, check your provider connectivity. If you are using an identity broker or user federation, verify that your connection settings specifically use "ldaps://" or other secure transport layers to guarantee encrypted communication between Keycloak and your external directory.
+
+Before concluding, keep in mind that regularly reviewing these configurations is critical for maintaining your organization's security posture. It is a best practice to always document any deviations from default security templates for your compliance reporting.

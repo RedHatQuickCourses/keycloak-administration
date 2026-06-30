@@ -1,0 +1,3 @@
+In this chapter, we will walk through the process of managing your documentation structure. 
+
+To keep your project organized, you may need to add or remove section entries within the `antora.yaml` file. Whenever you make these changes to the configuration, remember that you must also create or delete the corresponding directory for that chapter to ensure your project structure remains consistent.

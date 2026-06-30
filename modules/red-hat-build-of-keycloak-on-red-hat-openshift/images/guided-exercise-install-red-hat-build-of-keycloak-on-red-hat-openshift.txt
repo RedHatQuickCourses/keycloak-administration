@@ -1,0 +1,17 @@
+In this guided exercise, you will learn how to deploy the Red Hat build of Keycloak on an existing Red Hat OpenShift cluster. We will use the Keycloak Operator, which is the recommended approach for managing Keycloak instances in a containerized environment, as it provides automated lifecycle management.
+
+Before we begin, ensure you have three things: access to a Red Hat OpenShift cluster with cluster-admin or appropriate namespace permissions, the oc command-line interface installed and authenticated to your cluster, and access to the Red Hat OperatorHub.
+
+To start, let’s create a dedicated namespace to maintain a clean environment and isolate the deployment. Open your terminal and run the command: `oc new-project keycloak-system`.
+
+Next, we will install the Red Hat build of Keycloak Operator, which handles the installation, upgrades, and configuration of your instances. Navigate to the OpenShift Web Console and go to "Operators," then "OperatorHub." Search for "Red Hat build of Keycloak," select the operator, and click "Install." Make sure the installation mode is set to "A specific namespace on the cluster" and choose the `keycloak-system` namespace you just created. Finally, click "Install" to proceed.
+
+Once the operator status shows as "Succeeded," you need to define the Keycloak Custom Resource to initiate the deployment. Create a file named `keycloak-cr.yaml` on your local machine. This file should contain the API version, the kind, which is "Keycloak," and the metadata for the instance. The spec section defines your configuration, including the number of instances, the image source, database vendor, hostname, and your TLS certificate secret. 
+
+Keep in mind that before you apply this manifest, you must have a corresponding PostgreSQL database service and a TLS secret already configured, as Keycloak requires a relational database for production-grade environments.
+
+With your configuration file ready, go to your terminal and apply the file by running the command: `oc apply -f keycloak-cr.yaml`.
+
+To verify that the installation is proceeding correctly, monitor the progress by running the command: `oc get keycloak/keycloak -n keycloak-system -w`. You will want to wait until the status field transitions to "Running" and the "READY" field indicates that the pods have been successfully initialized.
+
+If you encounter any issues, there are a few troubleshooting steps to follow. If the installation stalls, check the operator logs using `oc logs deployment/keycloak-operator -n keycloak-system` to identify any configuration errors. If the pod enters a "CrashLoopBackOff" state, verify that your cluster has sufficient CPU and memory resources to pull the image and start the Java virtual machine. Finally, if you suspect database issues, ensure that the database credentials and hostnames provided in your custom resource specification are reachable from within the `keycloak-system` namespace.

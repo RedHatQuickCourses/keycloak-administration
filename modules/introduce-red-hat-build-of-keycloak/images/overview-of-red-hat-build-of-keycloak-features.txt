@@ -1,0 +1,29 @@
+Welcome to this overview of the Red Hat build of Keycloak. 
+
+Red Hat build of Keycloak is an open-source identity and access management solution designed for modern applications and services. It provides a centralized security layer that allows developers and administrators to secure their applications with minimal effort, effectively eliminating the need to write custom authentication or authorization code.
+
+Let’s look at the core features that make Red Hat build of Keycloak a comprehensive solution for handling complex identity requirements at scale.
+
+First, there is Single Sign-On, or SSO. This allows users to authenticate just once to gain access to multiple applications, which significantly reduces password fatigue and simplifies the user experience across your entire organization.
+
+Keycloak also includes Identity Brokering. In this model, Keycloak acts as an intermediary, allowing your users to authenticate via external third-party identity providers—such as Google, GitHub, or enterprise LDAP and Active Directory—while you maintain a consistent internal identity for them.
+
+Additionally, User Federation allows you to bridge existing user stores. You can import users from external LDAP or Active Directory systems or keep them synchronized, which allows for seamless integration with your existing legacy enterprise infrastructure.
+
+Security is built on proven industry standards to ensure interoperability. Keycloak supports OpenID Connect, which is an identity layer built on top of OAuth 2.0; the OAuth 2.0 framework for authorization; and SAML 2.0, an XML-based standard for exchanging authentication and authorization data.
+
+For administrators, the platform offers centralized management through the Admin Console and the Admin CLI. This provides a single pane of glass to manage users, roles, sessions, and security policies across all connected applications.
+
+You can also customize the user experience. Keycloak provides a templating engine for login, registration, and account management pages, allowing your organization to align the interface perfectly with your corporate branding.
+
+Finally, the platform supports fine-grained authorization. Beyond simple authentication, Keycloak supports Role-Based Access Control and attribute-based access control, enabling developers to enforce sophisticated security policies at the application level.
+
+So, why should you use Red Hat build of Keycloak? By delegating the security burden to this platform, your applications benefit in four key areas. First, you get credential isolation, meaning applications never handle user credentials directly, but instead rely on tokens issued by Keycloak. Second, you achieve a more rapid time-to-market by focusing on your core business logic rather than complex authentication flows. Third, you gain enhanced security through centralized auditing, brute-force protection, and the consistent security updates provided by Red Hat. And fourth, you gain operational flexibility, as Keycloak is designed for portability and high availability across environments, ranging from bare-metal servers to containerized platforms like Red Hat OpenShift.
+
+It is important to keep in mind that Red Hat build of Keycloak is designed to be highly extensible. If your organization has unique requirements, such as custom token mappers, proprietary authentication protocols, or unique user storage backends, you can use the Keycloak Service Provider Interface, or SPI, to extend the platform's functionality to meet your specific needs.
+
+To wrap up, let’s test your knowledge with a quick review. 
+
+First, true or false: Red Hat build of Keycloak stores user credentials directly within the application database to ensure higher performance. The answer is false. Keycloak promotes credential isolation, meaning applications work with tokens rather than storing or handling user credentials directly.
+
+Second, a multiple-choice question: Which of the following is an identity layer built on top of OAuth 2.0 supported by Keycloak? Your options are A: SAML 1.0, B: OpenID Connect, C: RADIUS, or D: LDAP. The correct answer is B: OpenID Connect.

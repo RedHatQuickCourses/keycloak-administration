@@ -1,0 +1,17 @@
+In this guided exercise, you will learn how to customize the authentication flow in Red Hat build of Keycloak 26.6. By modifying these flows, you can move beyond simple username and password logins to enforce stronger security postures, such as requiring Multi-Factor Authentication for specific client applications.
+
+Before we begin, ensure you have access to a running instance of Red Hat build of Keycloak 26.6, an existing realm with a test user account, and administrative access to the Admin Console.
+
+Let’s start by accessing the authentication settings. Authentication flows define the sequence of events that occur when a user attempts to log in. First, log in to the Red Hat build of Keycloak Admin Console. Select your desired realm from the top-left dropdown menu, then click "Authentication" in the left-hand navigation. You will see a list of built-in flows, such as "Browser," "Direct Grant," and "Registration."
+
+Now, let’s create a custom flow. It is a best practice to duplicate and modify an existing flow rather than changing the defaults directly. On the "Flows" tab, locate the "Browser" flow. Click the Actions menu—represented by three dots on the right—and select "Duplicate." Name your new flow "Custom-Browser-Flow," add a brief description, and click "Save."
+
+Next, we will add an authentication execution to require a One-Time Password, or OTP. Within your new "Custom-Browser-Flow," click the Actions menu and select "Add execution." From the list of available providers, choose "OTP Form" and click "Add." Once it appears in your flow, locate the "OTP Form" row and change the requirement setting from "Disabled" to "Required." Finally, use the drag-and-drop handles to position the "OTP Form" execution where you would like it to occur, such as immediately after the "Username Password Form."
+
+For these changes to take effect, you must bind the custom flow to the browser login process. Navigate back to the "Authentication" page and click the "Bindings" tab in the secondary navigation bar. Find the "Browser Flow" binding dropdown, select "Custom-Browser-Flow" from the list, and click "Save."
+
+To verify that your configuration is working, open a new Incognito or private browser window and navigate to your application's login page or the Keycloak Account Console. Enter your credentials. You should notice that after your password is authenticated, Keycloak now redirects you to the OTP setup or verification screen, confirming that your custom flow is active.
+
+Before we wrap up, here are a few troubleshooting tips. If you accidentally lock yourself out of the Admin Console, you can revert the flow binding using the kcadm.sh command-line tool. Simply run: `./kcadm.sh update realms/my-realm -s browserFlow=browser`. Also, if flows are failing to execute as expected, you can troubleshoot by setting the log level for `org.keycloak.authentication` to `DEBUG` in your configuration file.
+
+As a final reminder, always test your custom authentication flows in a staging environment before applying them to production realms to prevent accidental user lockout.

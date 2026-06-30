@@ -1,0 +1,9 @@
+Authentication and authorization serve as the core security pillars of the Red Hat build of Keycloak. They are designed to effectively manage user identity and control access within your applications.
+
+To understand these pillars, let’s look at their specific roles.
+
+First, authentication is responsible for verifying a user's identity. This is handled through highly configurable authentication flows, which allow you to define flexible login requirements and implement custom session management to suit your environment.
+
+Second, authorization is used to enforce access control. It utilizes a combination of Role-Based Access Control, or RBAC, and permission-based models. This ensures that users are restricted to accessing only the specific resources they are authorized to use.
+
+Finally, a key strength of the system is customization. You have the capability to tailor authentication sessions to meet your organization's specific security policies and the unique needs of your applications.

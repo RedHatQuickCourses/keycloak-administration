@@ -1,0 +1,13 @@
+Welcome to this module on Identity Brokering and User Federation.
+
+In the Red Hat build of Keycloak, these features are essential for centralizing your authentication processes by integrating directly with external identity sources. Let’s break down the core components that make this possible.
+
+First, we have Identity Brokering. This acts as an intermediary service, which enables your users to authenticate against external identity providers—or IdPs—such as social networks, business partners, or cloud-based services. This process relies on standard protocols like SAML v2.0 to ensure seamless communication.
+
+Next is User Federation. This facilitates the integration of your existing user directories, such as LDAP or Active Directory. By using this feature, Keycloak can effectively manage and authenticate users that are already stored in your external repositories.
+
+To ensure that identity information is handled correctly, we use Identity Provider Mappers. These are used during the federation process to map incoming tokens and assertions to local user and session attributes. This ensures that the identity information is accurately propagated to any requesting clients.
+
+Finally, the system provides robust user management capabilities. This allows users to link their local accounts with multiple external identities, or even automatically create accounts based on information provided by an integrated identity provider.
+
+By leveraging these tools, you can create a flexible, centralized authentication environment that scales with your organization's needs.

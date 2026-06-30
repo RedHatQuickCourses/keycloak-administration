@@ -1,0 +1,20 @@
+In this lab, you will implement secure access control by configuring authentication flows and enforcing authorization policies within the Red Hat build of Keycloak. By the end of this session, you will have successfully transitioned from basic user authentication to granular, permission-based access control.
+
+Before we begin, ensure you have a running instance of the Red Hat build of Keycloak in development mode, access to the Admin Console with administrative credentials, and a pre-configured realm, such as `lab-realm`, ready for use.
+
+Our lab scenario focuses on building a secure portal for internal applications. We will complete three primary objectives: configuring a custom user authentication flow, defining and mapping user roles, and enforcing authorization policies based on those roles.
+
+Let's start with Step 1: Configuring Authentication Flows. You are going to create a custom flow that forces a password update upon a user’s first login. Within the Admin Console, navigate to the Authentication section. Click "Create flow" and name it `Custom-Auth-Flow`. Once created, add the "Password Reset" execution to this flow, and finally, set this flow to "Required" for the Browser flow.
+
+Next, let’s move to Step 2: Defining Roles and Permissions to establish Role-Based Access Control, or RBAC. You will need to define two specific roles: `manager` and `employee`. After that, create a user named `jsmith` and assign them the `employee` role, then create a second user named `admin_user` and assign them the `manager` role. A helpful tip for efficiency: you can use the Admin CLI tool, `kcadm.sh`, to assign these roles. For instance, to map the `employee` role to `jsmith` in your `lab-realm`, you would run the command: `./kcadm.sh add-roles --uusername jsmith --rolename employee -r lab-realm`.
+
+Moving on to Step 3: Implementing Authorization Policies. Here, we will ensure that only users assigned the `manager` role can access a specific client resource. First, select your client under the "Clients" menu and ensure the "Authorization Enabled" toggle is turned on. Next, navigate to the "Authorization" tab. You will create a new "Role-Based Policy" named `manager-policy`, where you will select the `manager` role. Finally, create a "Permission" that links your new `manager-policy` to your specific target resource.
+
+In Step 4, we verify our configuration. Test your setup by logging into the Account Console as `jsmith`. You should confirm that the user has access to basic profile settings but is restricted from management endpoints. Then, log out and log in again as `admin_user`. You should now confirm that the administrative features defined in your authorization policy are fully accessible.
+
+If you encounter any issues, remember these troubleshooting tips. If a user cannot log in, check the authentication flow logs in the server console to ensure the execution path is configured correctly. If you receive "Access Denied" errors, double-check that the "Authorization Enabled" toggle is active on the client and verify that the user is correctly mapped to the required role. If you suspect token issues, you can use the JWT Debugger to inspect the access token generated for `admin_user` to ensure the roles are correctly embedded in the `realm_access` claim.
+
+To wrap up, let's check your understanding with a few questions: 
+First, why is it recommended to use Role-Based Access Control instead of assigning permissions directly to users? 
+Second, which standard, OIDC or SAML, is primarily used by the Red Hat build of Keycloak to transport authorization claims in a token? 
+And finally, how does "Credential Isolation" protect user security during the authentication flow?

@@ -1,0 +1,23 @@
+The Red Hat build of Keycloak provides a powerful command-line interface, or CLI, that allows administrators to automate tasks, manage resources, and perform administrative operations without needing to use the graphical Admin Console. This approach is essential for DevOps pipelines, bulk configuration management, and scripting repetitive tasks.
+
+At its core, the Admin CLI acts as a wrapper that facilitates interaction with the Keycloak Admin REST API. When you execute commands via the CLI, the tool translates your instructions into authenticated HTTP requests sent directly to the Admin REST endpoints. 
+
+There are three key characteristics to keep in mind. First, every CLI action corresponds to a specific REST API endpoint operation. Second, the CLI manages authentication contexts, ensuring that only authorized users can modify server configurations. And third, because it is command-based, it is perfectly suited for integration into CI/CD workflows and automated provisioning scripts.
+
+Before performing any operations, ensure you have met three important prerequisites: you must be authenticated as a user with the appropriate administrative permissions, your CLI tool must have network access to the Keycloak server instance, and your server URL and realm context must be correctly specified.
+
+The Admin CLI supports a broad spectrum of administrative tasks, including managing user accounts, registering or configuring OIDC clients, modifying realm settings and security policies, and programmatically managing access control assignments like roles and groups. 
+
+It is important to remember that access to these Admin REST endpoints is strictly controlled. Before you begin, ensure that the service account or user account used by the CLI has the necessary roles assigned via the Access Control settings in the Admin Console.
+
+Now, let’s walk through a guided exercise to interact with the Admin CLI. To follow along, ensure that your Red Hat build of Keycloak server is running and that the `kcadm.sh` or `kcadm.bat` script is available in your `bin` directory.
+
+First, you must authenticate to the server. Use the `config credentials` command to establish an authenticated session. For example, run the command starting with `./kcadm.sh config credentials`, followed by the `--server` URL, the `--realm` name, and your `--user` and `--password` credentials.
+
+Next, verify your connectivity by listing the current realms. Run the command `./kcadm.sh get realms`. If this returns a list, your authentication was successful.
+
+Third, to list users in a specific realm—for instance, one named `my-realm`—use the command `./kcadm.sh get users -r my-realm`. 
+
+Finally, to create a new user, you can use the `create` command. You can add a user by providing inline attributes, such as in the command `./kcadm.sh create users -r my-realm -s username=newuser -s enabled=true`.
+
+If you encounter issues while using the CLI, here are a few troubleshooting tips. If you receive a "401 Unauthorized" error, it usually means your session token has expired or the user lacks the required `realm-admin` permissions; simply re-authenticate using the `config credentials` command. If you see a "Connection Refused" error, ensure that the `--server` URL exactly matches the protocol, hostname, and port where your Keycloak instance is listening. Finally, if you run into problems with missing JSON attributes when using `create` or `update` commands, remember to use the `get` command on an existing object to view the expected schema and ensure you are providing all mandatory fields.

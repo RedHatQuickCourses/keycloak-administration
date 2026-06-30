@@ -1,0 +1,1 @@
+To begin this course, you will need to access the lab environment. Please follow the instructions provided for your specific platform to ensure you are ready to proceed with the hands-on exercises. If you need assistance accessing the lab environment, refer to the documentation or support resources for your platform.

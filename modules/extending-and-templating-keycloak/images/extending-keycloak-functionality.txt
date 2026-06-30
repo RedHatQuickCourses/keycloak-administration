@@ -1,0 +1,27 @@
+The Red Hat build of Keycloak is built on a modular architecture, designed to give developers the flexibility to extend its core capabilities to meet specific business requirements. While the platform comes equipped with a comprehensive set of built-in features, such as predefined authentication flows, you may occasionally encounter advanced use cases that require custom logic. 
+
+In this session, we will focus on how to extend the platform, with a specific look at client-side extensibility using custom adapters.
+
+Generally, Keycloak extensions fall into two categories. First, there are server-side extensions, where you might customize identity providers, user storage providers, or authentication service provider interfaces to integrate with legacy systems or custom databases. Second, there are client-side extensions, which leverage the Keycloak JS adapter to control how your applications interact with the Keycloak server, including the ability to handle custom login scenarios.
+
+If your web application uses the keycloak-js adapter, you can override default browser behaviors by implementing the KeycloakAdapter interface. This is particularly useful in environments like mobile wrappers or non-standard browsers that require unique ways of handling redirects or token storage.
+
+To create a custom adapter, you must implement the KeycloakAdapter interface. Using TypeScript is the recommended approach here, as it ensures that all required methods—such as login, logout, and register—are correctly and completely defined. In the example code provided in your documentation, you can see how an adapter object is constructed to house these custom methods.
+
+Once you have defined your adapter, the next step is applying it. You do this by passing the adapter to the init method during the initialization of your Keycloak instance. This signals the client-side library to delegate its core lifecycle actions to your new custom implementation.
+
+Now, let’s put this into practice with a hands-on activity. You are going to configure a custom client adapter to log specific authentication events to your browser console.
+
+First, ensure you have a project initialized with keycloak-js. 
+
+For step one, create a new file named custom-adapter.ts. Implement the KeycloakAdapter interface, and within the login method, add a console.log statement that prints "Authentication initiated via Custom Adapter."
+
+For step two, move to your main application file. Import your custom adapter, and update your keycloak.init call to include the adapter property, assigning it your custom adapter object.
+
+Finally, for step three, verify your work. Compile your TypeScript code and launch the application in a browser. Open your browser's Developer Tools and navigate to the Console tab. When you trigger the keycloak.login function, you should see your custom log message appear just before the redirect occurs.
+
+Before we conclude, here are two important troubleshooting tips. 
+
+First, remember that if you fail to implement every method required by the KeycloakAdapter interface, your TypeScript compiler will throw an error. Double-check that all interface members are present. 
+
+Second, watch out for adapter conflicts. If the behavior of the keycloak-js library seems inconsistent, verify that your custom adapter is not overriding standard browser navigation methods in a way that breaks the OIDC or OAuth 2.0 flow. If you need to maintain base functionality, ensure you call the super-methods or correctly replicate the original logic within your custom code.
