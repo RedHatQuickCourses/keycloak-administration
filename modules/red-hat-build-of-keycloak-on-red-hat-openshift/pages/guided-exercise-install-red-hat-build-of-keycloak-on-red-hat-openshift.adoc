@@ -1,0 +1,78 @@
+#  Guided Exercise: Install Red Hat build of Keycloak on Red Hat OpenShift
+
+= Guided Exercise: Install Red Hat build of Keycloak on Red Hat OpenShift
+
+In this exercise, you will deploy the Red Hat build of Keycloak on an existing Red Hat OpenShift cluster. We will utilize the Keycloak Operator, which is the recommended approach for managing Keycloak instances in a containerized environment to ensure automated lifecycle management.
+
+== Prerequisites
+* Access to a Red Hat OpenShift cluster with `cluster-admin` or appropriate namespace permissions.
+* The `oc` CLI tool authenticated to your cluster.
+* Access to the Red Hat OperatorHub.
+
+== Step 1: Create a Namespace
+To maintain a clean environment, we will isolate the Keycloak deployment in its own project.
+
+[source,bash]
+----
+oc new-project keycloak-system
+----
+
+== Step 2: Install the Red Hat build of Keycloak Operator
+The Operator manages the installation, upgrades, and configuration of Keycloak instances.
+
+1. Navigate to the OpenShift Web Console.
+2. Go to **Operators > OperatorHub**.
+3. Search for **"Red Hat build of Keycloak"**.
+4. Select the operator and click **Install**.
+5. Ensure the "Installation mode" is set to "A specific namespace on the cluster" and select `keycloak-system`.
+6. Click **Install**.
+
+== Step 3: Define the Keycloak Custom Resource
+Once the operator status is "Succeeded," we must define the `Keycloak` Custom Resource (CR) to initiate the deployment.
+
+Create a file named `keycloak-cr.yaml`:
+
+[source,yaml]
+----
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+  namespace: keycloak-system
+spec:
+  instances: 1
+  image: registry.access.redhat.com/rhbk/keycloak-26-rhel9:latest
+  db:
+    vendor: postgres
+    host: keycloak-db-service
+  hostname:
+    hostname: keycloak.example.com
+  tls:
+    certificateSecret:
+      secretName: keycloak-tls-secret
+----
+
+*NOTE: Ensure you have a corresponding PostgreSQL database service and a TLS secret configured before applying this manifest, as Keycloak requires a relational database for production-grade configurations.*
+
+== Step 4: Apply the Configuration
+Deploy the instance by applying the YAML file via the CLI:
+
+[source,bash]
+----
+oc apply -f keycloak-cr.yaml
+----
+
+== Step 5: Verify the Installation
+Monitor the progress of your deployment using the following command:
+
+[source,bash]
+----
+oc get keycloak/keycloak -n keycloak-system -w
+----
+
+Wait until the `STATUS` field transitions to `Running` and the `READY` field indicates the pods are successfully initialized.
+
+== Troubleshooting
+* **Check Operator Logs:** If the installation stalls, use `oc logs deployment/keycloak-operator -n keycloak-system` to identify configuration errors.
+* **Pod Resource Constraints:** If the Keycloak pod enters a `CrashLoopBackOff`, verify your cluster has sufficient CPU and memory resources to pull the image and start the JVM.
+* **Database Connectivity:** Ensure that the database credentials and hostnames provided in the `db` spec are reachable from within the `keycloak-system` namespace.

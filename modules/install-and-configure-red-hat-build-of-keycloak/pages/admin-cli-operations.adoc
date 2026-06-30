@@ -1,0 +1,83 @@
+#  Admin CLI operations
+
+= Admin CLI operations
+
+The Red Hat build of Keycloak provides a powerful command-line interface (CLI) that allows administrators to automate tasks, manage resources, and perform administrative operations without interacting with the graphical Admin Console. This approach is essential for DevOps pipelines, bulk configuration management, and scripting repetitive tasks.
+
+== Understanding the Admin CLI
+
+The Admin CLI is a wrapper that facilitates interaction with the Keycloak Admin REST API. When you execute commands via the CLI, the tool translates these instructions into authenticated HTTP requests sent to the Admin REST endpoints.
+
+Key characteristics include:
+* **REST API Interaction:** Every CLI action corresponds to an endpoint operation.
+* **Credential Isolation:** The CLI manages authentication contexts, ensuring that only authorized users can modify server configurations.
+* **Scriptability:** Because it is command-based, it is ideal for integration into CI/CD workflows and automated provisioning scripts.
+
+== Prerequisites for CLI Operations
+
+Before performing operations, you must ensure:
+1. **Authentication:** You have authenticated as a user with appropriate administrative permissions.
+2. **Connectivity:** The CLI tool has network access to the Keycloak server instance.
+3. **Configuration:** The server URL and realm context are correctly specified.
+
+== Common CLI Operations
+
+The Admin CLI supports a broad spectrum of administrative tasks. Common operations include:
+
+* **User Management:** Creating, listing, updating, or deleting user accounts.
+* **Client Management:** Registering new OIDC clients or configuring existing service accounts.
+* **Realm Configuration:** Modifying realm settings and security policies.
+* **Role and Group Mapping:** Managing access control assignments programmatically.
+
+[IMPORTANT]
+====
+Access to Admin REST endpoints is strictly controlled. Ensure that the service account or user account used by the CLI has the necessary roles assigned via the Admin Console's *Access Control* settings.
+====
+
+== Guided Exercise: Interacting with the Admin CLI
+
+In this exercise, you will authenticate with the server and list existing users.
+
+=== Prerequisites
+* Ensure your Red Hat build of Keycloak server is running.
+* Ensure the `kcadm.sh` (or `kcadm.bat`) script is available in your `bin/` directory.
+
+=== Step-by-Step Instructions
+
+1. **Authenticate to the Server:**
+   Use the `config credentials` command to establish an authenticated session.
++
+[source,bash]
+----
+./kcadm.sh config credentials --server http://localhost:8080/ --realm master --user admin --password <your-password>
+----
+
+2. **Verify Connectivity:**
+   List the current realms to ensure your authentication was successful.
++
+[source,bash]
+----
+./kcadm.sh get realms
+----
+
+3. **List Users in a Specific Realm:**
+   Retrieve a list of users for a realm (e.g., `my-realm`).
++
+[source,bash]
+----
+./kcadm.sh get users -r my-realm
+----
+
+4. **Create a New User:**
+   Use the `create` command to add a new user via a JSON input file or inline attributes.
++
+[source,bash]
+----
+./kcadm.sh create users -r my-realm -s username=newuser -s enabled=true
+----
+
+== Troubleshooting Common CLI Issues
+
+* **"401 Unauthorized":** This usually indicates that the session token has expired or the user lacks the required `realm-admin` permissions. Re-authenticate using the `config credentials` command.
+* **Connection Refused:** Ensure the `--server` URL matches the protocol (http/https), hostname, and port where your Keycloak instance is listening.
+* **Missing JSON Attributes:** When using the `create` or `update` commands, ensure all mandatory fields required by the REST API are provided. Use the `get` command on an existing object to see the expected schema.

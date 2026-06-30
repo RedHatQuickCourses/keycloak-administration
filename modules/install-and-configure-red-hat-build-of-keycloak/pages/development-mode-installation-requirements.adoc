@@ -1,0 +1,51 @@
+#  Development mode installation requirements
+
+= Development mode installation requirements
+
+Red Hat build of Keycloak provides a "development mode" specifically designed for rapid prototyping, theme development, and initial exploration. This mode prioritizes ease of use and immediate feedback by relaxing several security and performance constraints required for production environments.
+
+== Development Mode Overview
+
+Development mode is the recommended starting point when you want to get an instance up and running quickly. Unlike production mode, which enforces strict security and networking configurations, development mode automatically applies a set of convenient defaults that facilitate a smoother development lifecycle.
+
+[NOTE]
+====
+Development mode should **never** be used in production environments. It is intended strictly for local development and testing purposes.
+====
+
+== Default Configuration Characteristics
+
+When Red Hat build of Keycloak is started in development mode, the server initializes with the following configuration defaults:
+
+*   **HTTP Enabled:** The server enables non-TLS HTTP communication by default. This avoids the requirement to configure SSL/TLS certificates and keystores during the initial setup phase.
+*   **Disabled Strict Hostname Resolution:** Strict hostname checks are disabled. This allows you to access the server using various hostnames (such as `localhost` or local IP addresses) without requiring complex DNS or proxy configuration.
+*   **Local Caching:** The caching mechanism is set to `local`. This means no distributed cache is used, which simplifies the startup process but prevents high availability or clustering capabilities.
+*   **Theme and Template Caching Disabled:** Theme and template caching are turned off. This is a crucial feature for developers, as it allows changes to themes or FreeMarker templates to take effect immediately without requiring a server restart.
+
+== System Prerequisites
+
+Before launching in development mode, ensure your environment meets the following requirements:
+
+1.  **Supported Java Version:** You must have a compatible version of the Java Runtime Environment (JRE) or Java Development Kit (JDK) installed. Refer to the *Red Hat Knowledgebase Article on supported configurations* to verify the specific versions supported by your version of Red Hat build of Keycloak.
+2.  **Installation Directory:** Ensure you have downloaded and extracted the distribution archive. Familiarize yourself with the directory structure under the installation root to understand where configuration files and deployment artifacts reside.
+3.  **Port Availability:** By default, the server will attempt to bind to standard ports (typically 8080). Ensure these ports are not occupied by other services on your local machine.
+
+== Guided Exercise: Preparing for Development Mode
+
+Follow these steps to verify your local environment:
+
+. **Check Java Version:** Open your terminal and run the following command to verify your installation:
++
+[source,bash]
+----
+java -version
+----
+
+. **Validate Installation Directory:** Navigate to the folder where you extracted the Red Hat build of Keycloak distribution. Ensure you have the `bin/`, `conf/`, and `providers/` directories visible.
+
+. **Consult Supported Configurations:** Before proceeding with the installation, visit the Red Hat Knowledgebase to confirm that your specific OS, Java version, and database (if you intend to override the default H2 database) are supported.
+
+[TIP]
+====
+If you are developing custom themes, remember that development mode's automatic cache disabling is your best tool. If you decide to transition to production mode later, you will need to manually configure these cache settings to optimize performance.
+====

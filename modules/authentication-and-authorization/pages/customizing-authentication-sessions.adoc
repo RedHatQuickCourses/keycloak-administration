@@ -1,0 +1,65 @@
+#  Customizing authentication sessions
+
+= Customizing Authentication Sessions
+
+In Red Hat build of Keycloak, authentication sessions act as the "memory" of a login process, while user sessions represent the established trust once the user is successfully authenticated. Customizing these sessions is critical for balancing user convenience with security requirements.
+
+== Understanding Session Architecture
+
+To effectively customize authentication, it is essential to distinguish between the two primary session states:
+
+*   **Authentication Sessions:** Track the transient state of an active login flow. This is where the server remembers which step of the authentication process the user is currently performing.
+*   **User Sessions:** Created upon successful authentication. This session tracks the active user and facilitates Single Sign-On (SSO), ensuring the user does not need to re-authenticate when accessing different applications.
+*   **Client Sessions:** A subset of the user session that tracks the user’s state on a per-application (client) basis.
+
+== Configuring Session Lifespans
+
+Keycloak provides granular control over how long sessions persist. You can adjust these settings to mitigate the risk of session hijacking or to meet specific compliance requirements regarding inactivity timeouts.
+
+[IMPORTANT]
+====
+Session data is stored in the database by default and cached in the `sessions` and `clientSessions` caches for performance. Excessive session lifetimes can lead to increased memory pressure on your Infinispan clusters.
+====
+
+=== Guided Exercise: Adjusting Session Settings
+
+In this exercise, you will modify the session timeouts to ensure a more secure user experience.
+
+1.  Log in to the **Admin Console**.
+2.  Select your desired **Realm** from the top-left dropdown.
+3.  In the left navigation menu, click **Realm settings**.
+4.  Navigate to the **Sessions** tab.
+5.  Configure the following settings:
+    *   **SSO Session Idle:** Sets the time after which a user session expires if there is no activity.
+    *   **SSO Session Max:** The maximum time a user session can remain active, regardless of activity.
+    *   **Client Session Idle:** The time a client session can remain idle before it is destroyed.
+    *   **Client Session Max:** The maximum time a client session can persist.
+6.  Click **Save**.
+
+== Customizing Authentication Sessions via Flows
+
+Beyond session lifetimes, you can customize the authentication experience by modifying the authentication flows. By navigating to **Authentication** in the left menu, you can define how sessions are initiated and validated.
+
+*   **Browser Flows:** Customize how users interact with the login page.
+*   **Direct Grant Flows:** Customize how programmatic clients (non-browser) handle session creation.
+
+=== Guided Exercise: Forcing Re-authentication
+
+You can force a session to expire or require a re-authentication step by customizing the flow to include a "Conditional OTP" or "Re-authentication" execution.
+
+1.  Navigate to **Authentication** -> **Flows**.
+2.  Select the **Browser** flow and click the **Actions** menu (three dots) -> **Copy**.
+3.  Name the new flow `Custom-Secure-Browser-Flow`.
+4.  Add an execution of type **Re-authentication** to the flow.
+5.  Bind this new flow to the **Browser Flow** setting in **Realm Settings** -> **Authentication**.
+
+== Lab: Managing Session Expiration
+
+**Scenario:** Your security team requires that all user sessions be terminated after 30 minutes of inactivity and that no user session lasts longer than 8 hours, regardless of activity.
+
+**Steps:**
+1.  Navigate to **Realm Settings** > **Sessions**.
+2.  Set **SSO Session Idle** to `30 minutes`.
+3.  Set **SSO Session Max** to `8 hours`.
+4.  Observe the impact: Users who step away from their desks for more than 30 minutes will be prompted to log in again upon returning to any protected application.
+5.  Verify the settings by logging in as a test user and checking the `sessions` count in the **Sessions** tab under the **Users** menu.

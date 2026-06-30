@@ -1,0 +1,49 @@
+#  Quiz: Introduce Red Hat build of Keycloak
+
+= Quiz: Introduce Red Hat build of Keycloak
+
+Test your knowledge of the fundamental concepts and architectural pillars of Red Hat build of Keycloak.
+
+[quiz]
+====
+
+[question]
+.Which of the following protocols are natively supported by Red Hat build of Keycloak for identity and access management? (Select all that apply)
+- [x] OpenID Connect (OIDC)
+- [x] OAuth 2.0
+- [x] SAML 2.0
+- [ ] Kerberos (native implementation)
+- [ ] SSH
+
+[explanation]
+Red Hat build of Keycloak is designed to function as an identity provider supporting industry-standard protocols, specifically OIDC (built on top of OAuth 2.0) and SAML 2.0, allowing seamless integration with modern applications and legacy systems.
+
+[question]
+.What is the primary purpose of the Red Hat build of Keycloak's architectural design regarding credential isolation?
+- [ ] To allow applications to store user passwords locally.
+- [ ] To ensure that the identity provider manages credentials, keeping them isolated from individual application databases.
+- [ ] To force users to re-authenticate for every single microservice.
+- [ ] To replace the need for an underlying database.
+
+[explanation]
+Credential isolation is a core security benefit. By centralizing authentication, applications never handle raw user credentials, which significantly reduces the attack surface and simplifies compliance requirements.
+
+[question]
+.True or False: Red Hat build of Keycloak 26.6 provides configuration options to optimize for faster startup times and reduced memory footprints.
+- [x] True
+- [ ] False
+
+[explanation]
+As noted in the configuration documentation, administrators can apply specific build options and configuration methods to tailor the runtime environment for performance, ensuring the service is optimized for the specific requirements of the host environment.
+
+[question]
+.Which concept best describes Red Hat build of Keycloak’s role in a Single Sign-On (SSO) environment?
+- [ ] A database backup tool for web applications.
+- [ ] A central identity provider that manages authentication and authorization across multiple disparate applications.
+- [ ] A load balancer that distributes traffic across multiple web servers.
+- [ ] A firewall that blocks all incoming requests from the public internet.
+
+[explanation]
+Red Hat build of Keycloak acts as a central identity provider (IdP). It decouples the authentication logic from the application, allowing users to authenticate once and access multiple authorized services without re-entering credentials.
+
+====

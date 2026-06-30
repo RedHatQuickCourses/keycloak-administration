@@ -1,0 +1,75 @@
+#  Deploying Keycloak in containerized environments
+
+= Deploying Red Hat build of Keycloak in Containerized Environments
+
+In modern architecture, the Red Hat build of Keycloak is designed to run as an immutable container. Containerization allows for consistent deployment across environments—from local development to large-scale production clusters.
+
+== Containerization Principles
+When deploying Red Hat build of Keycloak in a containerized environment, adhere to these core principles:
+
+*   **Immutability:** Treat containers as ephemeral. Rather than modifying a running container, rebuild and redeploy the image with updated configurations or versions.
+*   **Performance Optimization:** Use optimized images to ensure fast startup times, which is critical for auto-scaling and frequent re-provisioning.
+*   **Security Isolation:** Leverage container-native security to protect sensitive credentials and network traffic.
+
+== Running the Standard Container
+For environments where rapid startup and pre-optimized image layers are not the primary constraint, you can deploy the standard Red Hat build of Keycloak image.
+
+[source,bash]
+----
+podman run --name mykeycloak -p 127.0.0.1:8080:8080 \
+  -e KEYCLOAK_ADMIN=admin \
+  -e KEYCLOAK_ADMIN_PASSWORD=change_me \
+  quay.io/keycloak/keycloak:latest \
+  start-dev
+----
+
+=== Initial Admin Credentials
+By default, the Red Hat build of Keycloak restricts the creation of the initial administrator to local network connections. Because containers represent a network boundary, you must explicitly pass administrative credentials via environment variables during the initial container startup.
+
+*   `KEYCLOAK_ADMIN`: Sets the username for the initial admin account.
+*   `KEYCLOAK_ADMIN_PASSWORD`: Sets the password for the initial admin account.
+
+[IMPORTANT]
+====
+Always manage these credentials via secure mechanisms, such as OpenShift Secrets or Kubernetes Secrets, rather than hardcoding them in command-line scripts or container manifests.
+====
+
+== Guided Exercise: Deploying a Containerized Keycloak
+
+In this exercise, you will deploy a standard Red Hat build of Keycloak container instance.
+
+=== Prerequisites
+*   A container runtime installed (e.g., Podman or Docker).
+*   Network access to the Red Hat Quay registry.
+
+=== Steps
+
+1. **Pull the Image:**
+   Ensure you have the latest image from the Red Hat registry.
++
+[source,bash]
+----
+podman pull quay.io/keycloak/keycloak:latest
+----
+
+2. **Run the Container:**
+   Execute the container using environment variables to define your admin credentials.
++
+[source,bash]
+----
+podman run --name keycloak-dev -p 8080:8080 \
+  -e KEYCLOAK_ADMIN=admin \
+  -e KEYCLOAK_ADMIN_PASSWORD=adminpassword \
+  quay.io/keycloak/keycloak:latest \
+  start-dev
+----
+
+3. **Verify Deployment:**
+   Open your web browser and navigate to `http://localhost:8080`. Log in using the credentials defined in the environment variables to access the Admin Console.
+
+== Production Considerations
+While running a container with `start-dev` is suitable for local exploration, transitioning to a production-ready containerized environment involves additional layers of configuration:
+
+*   **Database Connectivity:** Configure external JDBC-compliant databases (PostgreSQL, MariaDB, etc.) rather than using the default embedded H2 database.
+*   **TLS/SSL Termination:** Ensure secure communication by offloading TLS at the Load Balancer or Ingress controller level.
+*   **Configuration Management:** Use environment variables, CLI options, or mounted configuration files to manage Keycloak build-time and run-time parameters consistently across your CI/CD pipeline.

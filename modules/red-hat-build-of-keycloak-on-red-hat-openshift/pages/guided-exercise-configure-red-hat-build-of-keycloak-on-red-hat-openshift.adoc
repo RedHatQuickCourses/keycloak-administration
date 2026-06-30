@@ -1,0 +1,103 @@
+#  Guided Exercise: Configure Red Hat build of Keycloak on Red Hat OpenShift
+
+= Guided Exercise: Configure Red Hat build of Keycloak on Red Hat OpenShift
+
+This exercise guides you through the post-deployment configuration of the Red Hat build of Keycloak on an OpenShift cluster. After deploying the operator and the Keycloak custom resource, you must ensure the environment is optimized for secure production-like operations.
+
+== Prerequisites
+* A running Red Hat OpenShift cluster.
+* Red Hat build of Keycloak Operator installed via OperatorHub.
+* An existing `Keycloak` custom resource (CR) instance deployed in your project.
+
+== Task 1: Verify the Keycloak Custom Resource
+Before modifying configurations, ensure your Keycloak instance is healthy and the status is ready.
+
+1. Log in to your OpenShift cluster via the CLI:
++
+[source,bash]
+----
+oc login -u <username>
+oc project <your-keycloak-project>
+----
+
+2. Verify the status of the Keycloak instance:
++
+[source,bash]
+----
+oc get keycloak <instance-name> -o yaml
+----
+
+3. Ensure the `status.ready` field is set to `true`.
+
+== Task 2: Configure TLS and Ingress
+In OpenShift, the Keycloak route is managed by the Ingress Controller. To secure the communication, you should ensure proper TLS termination.
+
+1. Retrieve the default route created by the Keycloak operator:
++
+[source,bash]
+----
+oc get routes
+----
+
+2. If you are using custom certificates, patch the route to point to your Secret containing the certificate and key:
++
+[source,bash]
+----
+oc patch route <route-name> --type=merge -p '{"spec":{"tls":{"termination":"reencrypt","certificate":"<your-cert>","key":"<your-key>"}}}'
+----
+
+== Task 3: Update Environment Variables
+You can update the configuration of the running Keycloak instance by modifying the `Keycloak` custom resource. This triggers a rolling update of the pods.
+
+1. Edit the Keycloak resource to include custom build options or environment settings (e.g., database connection pooling or logging levels):
++
+[source,bash]
+----
+oc edit keycloak <instance-name>
+----
+
+2. Add or modify the `spec.additionalOptions` section:
++
+[source,yaml]
+----
+spec:
+  additionalOptions:
+    - name: http-relative-path
+      value: /auth
+    - name: log-level
+      value: INFO
+----
+
+3. Save and exit the editor. The operator will automatically reconcile the pods to reflect these changes.
+
+== Task 4: Validate Configuration Changes
+After the pods restart, verify that the new configurations have been applied.
+
+1. Monitor the rollout status:
++
+[source,bash]
+----
+oc rollout status statefulset/<instance-name>
+----
+
+2. Verify the configuration by inspecting the environment variables inside the pod:
++
+[source,bash]
+----
+oc set env pod/<instance-name>-0 --list | grep LOG_LEVEL
+----
+
+== Troubleshooting
+* **Pod CrashLoopBackOff**: If the pods fail to start, check the logs of the Keycloak operator to see if there is an invalid configuration parameter passed in the `additionalOptions`.
++
+[source,bash]
+----
+oc logs deployment/keycloak-operator-controller-manager -n <operator-namespace>
+----
+
+* **Route Not Found**: If the route is missing, verify that the `hostname` field in your `Keycloak` CR is correctly specified and that the operator has sufficient permissions to create OpenShift Route objects.
+
+[TIP]
+====
+For production environments, always refer to the *Configuring Red Hat build of Keycloak* documentation to ensure that your chosen configuration options are supported in the OpenShift containerized distribution.
+====

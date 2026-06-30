@@ -1,0 +1,48 @@
+#  Architecture and operational concepts
+
+= Architecture and Operational Concepts
+
+Red Hat build of Keycloak is designed as a high-performance, identity and access management solution that decouples application security logic from the application code itself. By leveraging standard protocols, it acts as an Identity Provider (IdP) that centralizes the management of user identities, roles, and permissions.
+
+== Core Architectural Components
+
+The architecture of Red Hat build of Keycloak is built upon a modular, scalable foundation designed to handle complex authentication and authorization requirements.
+
+*   **Realms:** The fundamental boundary for configuration. A realm is a space where you manage a set of users, credentials, roles, and groups. A user belongs to and logs into a realm. Realms are isolated from one another; for example, an organization can host multiple realms to separate distinct business units or B2B partners.
+*   **Clients:** These are the entities that request the authentication of a user. Examples include web applications, mobile apps, or backend services. Clients rely on the Keycloak server to verify identity and issue security tokens.
+*   **Users:** Entities that have the ability to log into your system. Users can be managed directly within the local Keycloak database, or their identity can be federated from external stores like LDAP or Active Directory.
+*   **Identity Brokering:** Allows Keycloak to act as an intermediary, delegating authentication to external Identity Providers (e.g., GitHub, Google, or other OIDC/SAML providers) while maintaining a unified identity context for your applications.
+
+== Operational Concepts
+
+Understanding how Red Hat build of Keycloak operates requires a look at how it manages the flow of trust and the lifecycle of data.
+
+=== Multi-Tenancy and Organizations
+As defined in the context of organizational management, Red Hat build of Keycloak enables multi-tenancy within a realm through the **Organization** construct. 
+*   **Isolation:** While realms provide the primary scope, organizations allow for granular management of members within a realm.
+*   **B2B Integration:** Organizations provide a dedicated context for business partners or customers, allowing administrators to manage the lifecycle of these external identities without polluting the primary user directory.
+
+=== Security Token Mechanisms
+Keycloak operates primarily through the issuance of security tokens (JWTs - JSON Web Tokens). 
+*   **Credential Isolation:** Keycloak ensures that credentials (passwords, OTPs, or biometric data) never leave the server. Applications interact only with the token, which contains claims about the user (e.g., identity, roles, organization membership).
+*   **Token Propagation:** Organizations can propagate organization-specific claims directly into these tokens, enabling downstream applications to make authorization decisions based on the user's specific context within that organization.
+
+=== Policy-Based Configuration
+The system utilizes a modular **Client Policy** framework to enforce security postures. This is structured around four pillars:
+1.  **Condition:** The specific trigger or criteria that must be met (e.g., the client is using a specific protocol).
+2.  **Executor:** The action taken when a condition is met (e.g., forcing a specific authentication flow).
+3.  **Profile:** A collection of policies that define a security standard for a set of clients.
+4.  **Policy:** The pairing of conditions with executors to enforce uniform security rules across the ecosystem.
+
+== Operational Workflow Summary
+
+[cols="1,3", options="header"]
+|===
+| Component | Operational Function
+| *Authentication* | Validates the user's identity through credentials or brokered external providers.
+| *Authorization* | Determines what the authenticated user is allowed to do via roles and permissions.
+| *Token Service* | Issues OIDC/OAuth 2.0/SAML tokens that secure communication between the user and the client application.
+| *Management* | Administers the lifecycle of users, groups, and organizations via the Admin Console or CLI.
+|===
+
+By centralizing these functions, Red Hat build of Keycloak reduces the operational overhead of securing multiple applications, providing a single source of truth for identity data while maintaining strict security boundaries between distinct user segments.

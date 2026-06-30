@@ -1,0 +1,97 @@
+#  Guided Exercise: Red Hat build of Keycloak Admin CLI
+
+= Guided Exercise: Red Hat build of Keycloak Admin CLI
+
+In this exercise, you will interact with the Red Hat build of Keycloak using the `kcadm.sh` (or `kcadm.bat`) Admin CLI tool. The Admin CLI is a powerful utility that allows you to perform administrative tasks, such as creating realms, managing users, and updating configurations, directly from the terminal.
+
+== Prerequisites
+* A running instance of Red Hat build of Keycloak.
+* The `kcadm` tool installed (located in the `bin/` directory of your Keycloak distribution).
+* Credentials for an administrative user.
+
+== Step 1: Authenticate with the Admin CLI
+Before running commands, you must establish an authenticated session. The CLI uses an OIDC session to perform operations against the Admin REST API.
+
+1. Open your terminal and navigate to your Keycloak `bin/` directory.
+2. Run the authentication command, providing your server URL and credentials:
+
+[source,bash]
+----
+./kcadm.sh config credentials --server http://localhost:8080/ --realm master --user admin --password <YOUR_PASSWORD>
+----
+
+*Note: If authentication is successful, the CLI saves an access token locally, allowing subsequent commands to run without re-authenticating.*
+
+== Step 2: Explore Realms
+Once authenticated, you can list the realms currently managed by your Keycloak instance.
+
+1. Execute the following command to retrieve a list of realms:
+
+[source,bash]
+----
+./kcadm.sh get realms
+----
+
+2. Identify the JSON output for the `master` realm. This confirms that your CLI session is correctly communicating with the server.
+
+== Step 3: Create a New Realm via CLI
+The Admin CLI allows for the automation of resource creation by passing JSON configuration files.
+
+1. Create a file named `new-realm.json` with the following content:
+
+[source,json]
+----
+{
+    "realm": "Development",
+    "enabled": true
+}
+----
+
+2. Run the following command to create the realm:
+
+[source,bash]
+----
+./kcadm.sh create realms -f new-realm.json
+----
+
+3. Verify the creation by listing the realms again:
+
+[source,bash]
+----
+./kcadm.sh get realms
+----
+
+== Step 4: Manage Users via CLI
+You can also perform CRUD operations on users. Let's create a new user in your newly created "Development" realm.
+
+1. Create a user:
+
+[source,bash]
+----
+./kcadm.sh create users -r Development -s username=devuser -s enabled=true
+----
+
+2. Set a password for this user:
+
+[source,bash]
+----
+./kcadm.sh set-password -r Development --username devuser --new-password MySecurePassword123!
+----
+
+== Step 5: Troubleshooting and Verification
+If you encounter issues, verify the following:
+
+* **Connectivity:** Ensure the server is reachable via the `--server` flag.
+* **Permissions:** The user account used for authentication must have the `manage-realm` or appropriate fine-grained permissions for the targeted realm.
+* **Debug Mode:** If you are receiving unexpected errors, append `--debug` to your command to see the underlying HTTP requests and responses:
+
+[source,bash]
+----
+./kcadm.sh get realms --debug
+----
+
+== Summary
+You have successfully:
+* Authenticated a CLI session against the Keycloak Admin API.
+* Retrieved and created resources using the `get` and `create` operations.
+* Managed user credentials via the command line, demonstrating how the Admin CLI can be used for automation in CI/CD pipelines or operational scripting.

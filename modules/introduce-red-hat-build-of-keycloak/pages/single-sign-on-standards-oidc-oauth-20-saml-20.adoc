@@ -1,0 +1,51 @@
+#  Single Sign-On standards (OIDC, OAuth 2.0, SAML 2.0)
+
+= Single Sign-On standards (OIDC, OAuth 2.0, SAML 2.0)
+
+In the Red Hat build of Keycloak, enabling Single Sign-On (SSO) relies on standardized protocols that allow applications to delegate authentication to a centralized server. Understanding the distinctions between these protocols is critical for architecting secure applications.
+
+== OpenID Connect (OIDC) and OAuth 2.0
+
+While often discussed together, OAuth 2.0 and OpenID Connect serve distinct purposes:
+
+*   **OAuth 2.0:** Primarily an **authorization framework**. It allows an application to obtain an "access token" to invoke services on behalf of a user. It does not natively provide identity information about the user.
+*   **OpenID Connect (OIDC):** An **identity layer** built on top of the OAuth 2.0 protocol. It adds an "ID token" to the OAuth 2.0 flow, which contains information about the authenticated user.
+
+=== Key Characteristics of OIDC
+*   **Web-Optimized:** Designed specifically for web-based ecosystems.
+*   **Lightweight:** Uses JSON for tokens, making them highly compatible with JavaScript-based client-side applications (e.g., HTML5/SPA).
+*   **Developer Experience:** Includes advanced security features, such as the `iframe` mechanism used to determine a user's current login status without forcing a full redirect.
+
+== SAML 2.0
+
+Security Assertion Markup Language (SAML) 2.0 is a mature, XML-based standard for exchanging authentication and authorization data between parties.
+
+=== Key Characteristics of SAML
+*   **Architecture:** It acts as a layer on top of the web, originally derived from SOAP and web service messaging.
+*   **Verbosity:** SAML is significantly more verbose than OIDC, as it relies on complex XML documents for communication.
+*   **Security Mechanisms:** It utilizes XML signatures and encryption to verify the integrity and confidentiality of requests and responses.
+*   **Use Cases:**
+    *   **Authentication Delegation:** An application requests that the Keycloak server authenticates a user. Upon success, Keycloak returns an XML document containing an "SAML Assertion" with user attributes and role mappings.
+    *   **Legacy Integration:** Often chosen for existing enterprise applications already secured with SAML, or in environments where its maturity is a strict compliance requirement.
+
+== Comparison Summary
+
+| Feature | OpenID Connect (OIDC) | SAML 2.0 |
+| :--- | :--- | :--- |
+| **Format** | JSON | XML |
+| **Primary Use** | Modern Web/Mobile Applications | Enterprise/Legacy Applications |
+| **Complexity** | Lower (Developer-friendly) | Higher (Verbose/Complex) |
+| **Maturity** | High (Modern standard) | Very High (Legacy standard) |
+
+== Practical Considerations
+
+When choosing between these standards for your Red Hat build of Keycloak deployment, consider the following:
+
+1.  **Client-Side Compatibility:** If you are building modern JavaScript or single-page applications, OIDC is the preferred choice due to its native JSON support and ease of implementation.
+2.  **Existing Infrastructure:** If your environment already utilizes SAML for existing applications, Keycloak acts as an effective SAML Identity Provider (IdP) to maintain security posture without refactoring legacy authentication logic.
+3.  **Credential Isolation:** In both protocols, Red Hat build of Keycloak ensures credential isolation by acting as the broker; the end application never sees the user's password, only the token or assertion confirming the identity.
+
+[TIP]
+====
+For most new projects in Red Hat build of Keycloak, default to **OIDC** unless there is a specific requirement for SAML-based interoperability.
+====

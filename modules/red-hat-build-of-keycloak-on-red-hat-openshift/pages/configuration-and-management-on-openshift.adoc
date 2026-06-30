@@ -1,0 +1,75 @@
+#  Configuration and management on OpenShift
+
+= Configuration and Management on Red Hat build of Keycloak on OpenShift
+
+When deploying the Red Hat build of Keycloak on OpenShift, configuration and management move away from traditional file-based editing to a declarative, container-native approach. This section covers the essential mechanisms for managing your Keycloak instance within an OpenShift environment.
+
+== Operational Considerations for OpenShift
+
+Unlike standalone deployments, Red Hat build of Keycloak on OpenShift relies on the OpenShift Operator for lifecycle management. Key configurations—such as environment variables, secrets, and truststores—are managed via custom resources (CRs) that the Operator reconciles.
+
+=== Truststore Configuration
+To secure communication between Keycloak and external services (like an OpenShift API server for identity brokering), you must manage a custom Truststore.
+
+[NOTE]
+====
+The certificate of the OpenShift 4 instance must be stored in the Red Hat build of Keycloak Truststore. Ensure your Keycloak server is explicitly configured to utilize this truststore.
+====
+
+To integrate an OpenShift v4 instance as an Identity Provider, follow these configuration steps:
+
+1. **Retrieve the API URL**: Run the following command to identify your cluster's API endpoint:
++
+[source,bash]
+----
+oc cluster-info
+----
+2. **Identify the URL**: Locate the output formatted as: `Kubernetes master is running at https://api.<your-openshift-domain>:6443`.
+3. **Configure the Identity Provider**:
+* Navigate to the **Admin Console**.
+* Select **Identity Providers** in the left-hand menu.
+* Select **OpenShift v4** from the **Add provider** dropdown.
+* Input the **Client ID**, **Client Secret**, and the **Base URL** (the API URL obtained in step 2).
+
+== High Availability (HA) and Multi-Site Deployments
+
+For production environments requiring high availability, Red Hat provides certified integration components. When configuring your OpenShift deployment, ensure you align with these supported versions:
+
+|===
+| Component | Supported Versions (Minimum) | Note
+
+| OpenShift Container Platform | 4.17+ | Required for multi-AZ or on-prem deployments.
+| Red Hat Data Grid | 8.5.x | Required for multi-cluster ROSA deployments.
+| AWS Aurora PostgreSQL | 17.x | Required for multi-cluster ROSA deployments.
+|===
+
+[WARNING]
+====
+The image-based configuration provided by the Red Hat build of Keycloak is strictly designed for OpenShift environments. Using these specific configurations on generic Kubernetes distributions is not supported.
+====
+
+== Guided Exercise: Configuring Identity Brokering with OpenShift
+
+This exercise demonstrates how to link your OpenShift 4 instance as an identity provider to your Keycloak realm.
+
+*Prerequisites:*
+* A running Red Hat build of Keycloak instance on OpenShift.
+* The OpenShift cluster certificate imported into the Keycloak truststore.
+
+. **Step 1: Accessing the Admin Console**
+   Login to the Admin Console using your administrator credentials.
+
+. **Step 2: Adding the Provider**
+   In the navigation menu, click **Identity Providers**. From the **Add provider** list, select **Openshift v4**.
+
+. **Step 3: Defining Parameters**
+   * **Client ID/Secret**: Enter the credentials generated for your Keycloak client within the OpenShift project.
+   * **Base URL**: Enter the API URL retrieved via `oc cluster-info`.
+   * **Redirect URI**: Copy the generated Redirect URI provided in the console; you will need this to configure the OAuth client in the OpenShift console.
+
+. **Step 4: Finalizing**
+   Save the configuration. Users will now see the "Log in with OpenShift" option on the login page.
+
+== Troubleshooting Tips
+* **Truststore Issues**: If authentication fails with a `PKIX path building failed` error, verify that your OpenShift API server certificate has been correctly injected into the Keycloak Truststore secret and referenced in the `Keycloak` Custom Resource.
+* **Compatibility**: Always verify that your OpenShift version matches the certified version (4.17+) to ensure full support for the Keycloak Operator features.

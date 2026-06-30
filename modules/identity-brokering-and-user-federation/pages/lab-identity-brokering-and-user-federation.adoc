@@ -1,0 +1,69 @@
+#  Lab: Identity Brokering and User Federation
+
+= Lab: Identity Brokering and User Federation
+
+In this lab, you will configure Red Hat build of Keycloak to act as an Identity Broker. You will integrate an external Identity Provider (IdP) to allow users to authenticate using credentials from an external source, and map the incoming identity information to your local realm.
+
+== Prerequisites
+* A running instance of Red Hat build of Keycloak.
+* Administrative access to the Admin Console.
+* Access to an external Identity Provider (e.g., a Google developer account or a SAML-based IdP).
+
+== Objectives
+* Configure a new Identity Provider in the Keycloak Admin Console.
+* Set up Identity Provider Mappers to sync user attributes.
+* Test the authentication flow via the brokered Identity Provider.
+
+== Exercise 1: Configuring an Identity Provider
+
+In this task, you will create a brokering relationship with an external provider.
+
+. Log in to the **Keycloak Admin Console**.
+. In the left-hand menu, click **Identity providers**.
+. Select an provider from the **Add provider** dropdown (e.g., `Google` or `SAML v2.0`).
+. Configure the required fields based on your external provider's documentation:
+* **Redirect URI**: Copy this value to your external provider's configuration console as the "Authorized Redirect URI."
+* **Client ID/Client Secret**: Enter the credentials obtained from the external provider.
+. Click **Save**.
+
+== Exercise 2: Implementing Identity Provider Mappers
+
+Identity provider mappers allow you to propagate information from the external IdP to your local user sessions.
+
+. Within your newly created Identity Provider configuration, navigate to the **Mappers** tab.
+. Click **Add mapper**.
+. Configure the mapper to extract identity information:
+* **Name**: `Sync Email`
+* **Mapper type**: `Attribute Importer`
+* **Identity Provider Attribute**: `email` (or the specific attribute name provided by the IdP).
+* **User Attribute**: `email`
+. Click **Save**.
+
+[NOTE]
+====
+When using Identity Brokering APIs V2, remember that Keycloak can store tokens issued by the external IdP. If your application needs to call the external provider's API on behalf of the user, ensure "Store tokens" is enabled in the provider settings.
+====
+
+== Exercise 3: Verifying the Integration
+
+Now, test that users can log in via the external broker.
+
+. Open your application or the Keycloak Account Console in an incognito browser window.
+. Navigate to the login page.
+. You should now see the external Identity Provider button displayed.
+. Click the button and authenticate using the external provider's credentials.
+. Upon successful authentication, check the **Users** section in the Admin Console. You should see a new user created (or linked) with the attributes mapped from the Identity Provider.
+
+== Troubleshooting
+* **Redirect URI Mismatch**: Ensure the Redirect URI in Keycloak matches exactly what is configured in the external IdP portal.
+* **Protocol Errors**: If using SAML, verify that the Identity Provider metadata URL or XML file is reachable by your Keycloak instance.
+* **Logging**: Monitor the Keycloak server logs for detailed authentication handshake errors:
++
+[source,bash]
+----
+# View server logs to debug authentication flows
+tail -f /opt/keycloak/data/log/keycloak.log
+----
+
+== Summary
+You have successfully configured Red Hat build of Keycloak as an Identity Broker, mapped external attributes to the local user database, and verified the authentication flow. This architecture allows for a centralized user management strategy across disparate security domains.

@@ -1,0 +1,66 @@
+#  Lab: Install Red Hat build of Keycloak
+
+= Lab: Install Red Hat build of Keycloak
+
+In this lab, you will perform a containerized deployment of the Red Hat build of Keycloak in development mode. This environment is intended for learning, experimentation, and initial configuration exploration.
+
+== Prerequisites
+* A system with `podman` or `docker` installed.
+* Network access to the Red Hat Ecosystem Catalog (`registry.redhat.io`).
+* Sufficient permissions to pull container images and bind to local network ports (8080).
+
+== Scenario
+You are tasked with setting up a local instance of Red Hat build of Keycloak to begin exploring the administrative interface and security configurations. You will use the Development mode to expedite the setup process.
+
+[WARNING]
+====
+Development mode is intended for testing purposes only. It features insecure defaults, such as non-TLS communication and simplified security hardening. Never use this configuration in a production environment.
+====
+
+== Task 1: Deploy Keycloak in Development Mode
+
+Execute the following command to pull the Red Hat build of Keycloak 26.6 image and start the server.
+
+. Run the Keycloak container:
++
+[source,bash]
+----
+podman run --name mykeycloak \
+  -p 127.0.0.1:8080:8080 \
+  -e KC_BOOTSTRAP_ADMIN_USERNAME=admin \
+  -e KC_BOOTSTRAP_ADMIN_PASSWORD=change_me \
+  registry.redhat.io/rhbk/keycloak-rhel9:26.6 \
+  start-dev
+----
+
+. **Explanation of parameters:**
+* `--name mykeycloak`: Assigns a human-readable name to your container.
+* `-p 127.0.0.1:8080:8080`: Maps the container's port 8080 to your local machine's port 8080.
+* `-e KC_BOOTSTRAP_ADMIN_USERNAME/PASSWORD`: Sets the initial administrative credentials.
+* `start-dev`: Instructs the server to run in development mode, enabling features like automatic TLS generation (self-signed) and relaxed security constraints.
+
+== Task 2: Verify the Installation
+
+Once the container logs indicate that the server has started successfully, you must verify the accessibility of the Admin Console.
+
+1. Open your web browser and navigate to: `http://localhost:8080`
+2. Click the **Administration Console** link.
+3. Log in using the credentials defined in Task 1:
+   * **Username**: `admin`
+   * **Password**: `change_me`
+
+== Troubleshooting
+If you encounter issues during startup, check the following:
+
+* **Port Conflicts**: If port 8080 is already in use on your host machine, you can change the host-side mapping. For example, use `-p 127.0.0.1:9090:8080` and access Keycloak at `http://localhost:9090`.
+* **Registry Authentication**: If you receive an "access denied" error when pulling the image, ensure you are logged into the Red Hat Registry using `podman login registry.redhat.io`.
+* **Logs**: If the container exits immediately, run `podman logs mykeycloak` to view the startup error logs.
+
+== Cleanup
+Once you have completed your experimentation, stop and remove the container to free up system resources:
+
+[source,bash]
+----
+podman stop mykeycloak
+podman rm mykeycloak
+----

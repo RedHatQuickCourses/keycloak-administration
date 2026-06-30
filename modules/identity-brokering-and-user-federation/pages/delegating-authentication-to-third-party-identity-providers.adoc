@@ -1,0 +1,51 @@
+#  Delegating authentication to third-party identity providers
+
+= Delegating Authentication to Third-Party Identity Providers
+
+== Overview
+Delegating authentication allows your applications to offload the responsibility of verifying user credentials to an external system. Within the Red Hat build of Keycloak, this is facilitated through the **Identity Broker** component. 
+
+By acting as an intermediary, Red Hat build of Keycloak enables users to sign in using accounts from external identity providers (IDPs), such as Google, GitHub, or another SAML-based enterprise system, while maintaining a unified security policy for your internal applications.
+
+== How Identity Delegation Works
+When a user attempts to access your application, Red Hat build of Keycloak intercepts the request and redirects the user to the configured external IDP. Once the external IDP authenticates the user, it sends an assertion or token back to Red Hat build of Keycloak. 
+
+Keycloak then validates this response and issues its own internal token to the client application. This process ensures that:
+* **Protocol Abstraction:** The client application only needs to understand the Red Hat build of Keycloak protocol (OIDC/SAML), regardless of how the user initially authenticated.
+* **Centralized Management:** You manage your authentication policies in one place, even if users come from diverse sources.
+* **Seamless Experience:** Users can access your services using existing credentials without creating new, siloed accounts.
+
+== Identity Provider Mappers
+A critical aspect of delegating authentication is ensuring that the data provided by the external IDP is correctly ingested by your local environment. **Identity Provider Mappers** allow you to transform and map incoming tokens or assertions into user attributes or session information. This is essential for:
+* Synchronizing user profile data (e.g., email, first name) from the external provider to the local user record.
+* Mapping external roles to local groups or roles within your realm.
+* Propagating session data to ensure the client application has the necessary context to authorize the user.
+
+== Guided Exercise: Integrating an External OIDC Identity Provider
+
+In this exercise, you will configure an external OpenID Connect (OIDC) provider as an Identity Broker.
+
+=== Prerequisites
+* A running instance of Red Hat build of Keycloak.
+* A registered application (client) on the target external OIDC provider (e.g., Google or another Keycloak instance).
+
+=== Steps
+
+. **Access the Admin Console**: Log in to the Red Hat build of Keycloak Admin Console.
+. **Select Realm**: Select the realm where you want to configure the brokering.
+. **Navigate to Identity Providers**:
+  * In the left-hand menu, click **Identity providers**.
+  * Click the **Add provider** dropdown and select **OpenID Connect v1.0**.
+. **Configure Provider Details**:
+  * **Alias**: Enter a unique name for this provider (e.g., `external-oidc`).
+  * **Client ID & Client Secret**: Enter the credentials provided by the external OIDC provider.
+  * **Discovery Endpoint**: Enter the URL of the external OIDC provider’s `.well-known/openid-configuration`.
+. **Save and Test**: 
+  * Click **Save**.
+  * Use the **Redirect URI** provided in the settings to ensure your external IDP has the correct callback URL configured.
+  * Open a new browser session and navigate to your application. You should now see the external provider listed on your login page.
+
+== Troubleshooting Tips
+* **Invalid Redirect URI**: Ensure the `Redirect URI` in the Keycloak Identity Provider configuration matches exactly what is registered in the external IDP's dashboard.
+* **Token Mapping Issues**: If user attributes are not appearing after login, check the **Mappers** tab in the Identity Provider configuration. Ensure that the mapper type matches the data structure expected from the provider.
+* **Clock Skew**: If authentication fails with "invalid token," ensure the system time on your Keycloak server is synchronized via NTP, as clock skew can cause token validation to fail.

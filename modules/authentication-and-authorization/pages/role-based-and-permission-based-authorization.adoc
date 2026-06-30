@@ -1,0 +1,61 @@
+#  Role-based and permission-based authorization
+
+= Role-based and permission-based authorization
+
+In the Red Hat build of Keycloak, managing access control is a fundamental security requirement. To simplify the complexity of managing permissions for thousands of individual users, Keycloak utilizes **Role-Based Access Control (RBAC)**.
+
+== Understanding Roles and Authorization
+
+Authorization is the process of granting access to a user once they have been authenticated. Instead of assigning permissions to individual users—which is difficult to maintain and scale—you assign permissions to **roles**, and then map users to those roles.
+
+=== Roles
+Roles identify a category or "type" of user, such as `admin`, `manager`, `employee`, or `guest`. By defining roles, you create a logical abstraction that applications can use to check if a user is permitted to perform a specific action.
+
+There are two primary scopes for roles in Keycloak:
+*   **Realm Roles:** Global roles that apply to users across the entire realm.
+*   **Client Roles:** Roles specific to a particular application (client). This allows you to have a `user` role for an internal inventory app that is distinct from a `user` role in a public-facing portal.
+
+=== User Role Mapping
+A **user role mapping** is the link between a specific user identity and a role. When a user authenticates, Keycloak includes these mappings in the security tokens (such as OIDC ID or Access tokens). Applications receive these tokens and inspect the roles to enforce access control decisions.
+
+== Permission-Based Authorization
+While roles define *who* the user is, permission-based authorization defines *what* the user can do within an application. 
+
+In Keycloak, you can refine your security model by using **Groups**. Groups are collections of users that share common attributes or roles. Applying a role to a group automatically grants that role to every user within that group, streamlining the administration of large organizations.
+
+[IMPORTANT]
+====
+Avoid assigning roles directly to individuals whenever possible. Use Groups to manage role assignments at scale. This minimizes administrative overhead and ensures consistent access policies across your user base.
+====
+
+== Guided Exercise: Authorize Users with Red Hat build of Keycloak
+
+In this exercise, you will create a role and map a user to it to test authorization.
+
+=== Step 1: Create a Realm Role
+1. Log in to the **Admin Console**.
+2. Select your Realm from the dropdown menu.
+3. In the left navigation menu, click **Realm roles**.
+4. Click **Create role**.
+5. Enter `manager` in the **Role name** field and click **Save**.
+
+=== Step 2: Map a User to the Role
+1. In the left navigation menu, click **Users**.
+2. Search for the user you wish to authorize and click on their **Username**.
+3. Navigate to the **Role mapping** tab.
+4. Click **Assign role**.
+5. Filter by "Realm roles," select the `manager` role, and click **Assign**.
+
+=== Step 3: Verify the Mapping
+You can now observe the user's effective permissions. When the user logs into an application configured with this Keycloak realm, the `manager` role will be included in their access token, signaling to the application that the user is authorized to perform manager-level tasks.
+
+== Lab: Authentication and Authorization
+
+*Goal: Configure a granular access control environment.*
+
+1. **Setup:** Create a new group named `FinanceTeam`.
+2. **Action:** Create a client role named `report-viewer` within a specific Client (e.g., `finance-app`).
+3. **Assignment:** Assign the `report-viewer` role to the `FinanceTeam` group.
+4. **Validation:** Add a test user to the `FinanceTeam` group and verify that the user inherits the `report-viewer` role via the **Effective role** view in the User details page.
+
+By completing these steps, you demonstrate how to decouple identity management (Users/Groups) from application access logic (Roles).

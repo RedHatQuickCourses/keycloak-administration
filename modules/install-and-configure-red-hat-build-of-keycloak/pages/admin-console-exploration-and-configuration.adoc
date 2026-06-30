@@ -1,0 +1,66 @@
+#  Admin Console exploration and configuration
+
+= Admin Console exploration and configuration
+
+The Red Hat build of Keycloak Admin Console provides a centralized web-based user interface for managing all aspects of your identity and access management system. From this interface, administrators can manage realms, users, clients, identity providers, and authentication flows.
+
+== Understanding the Admin Console
+
+The Admin Console is the primary interaction point for configuring Keycloak security policies. Before accessing the console, ensure you have completed the initial installation and created your initial administrator account.
+
+[IMPORTANT]
+====
+If no administrators exist, you must follow the `Creating the first administrator` procedure to establish the root account before you can log in to the Admin Console.
+====
+
+=== Accessing the Admin Console
+
+To sign in, navigate to the base URL of your Keycloak instance and append `/admin` to the address. 
+
+*   **Sign In:** Provides authentication for administrative access.
+*   **Permissions:** If you are not a master-realm administrator, ensure an existing administrator has granted you the necessary privileges to manage specific realms.
+
+=== Configuring Hostname for the Admin Console
+
+In production environments, you may often place Keycloak behind a reverse proxy. To ensure the Admin Console remains reachable when using a different address than the public-facing hostname, use the `hostname-admin` configuration option.
+
+[source,bash]
+----
+# Example of setting the admin console hostname via CLI
+./kc.sh start --hostname-admin=admin.example.com
+----
+
+*   **Type:** String
+*   **CLI Option:** `--hostname-admin`
+*   **Description:** Defines the specific address for accessing the administration console. Use this when the management interface is exposed on a distinct network path or proxy configuration.
+
+== Guided Exercise: Explore and Configure the Admin Console
+
+In this exercise, you will log in to the Admin Console and familiarize yourself with the navigation structure.
+
+=== Step 1: Access the Console
+1. Open your web browser and navigate to the URL where your Keycloak instance is running (e.g., `http://localhost:8080/admin`).
+2. Enter the credentials created during your initial setup.
+
+=== Step 2: Navigate the Realm Menu
+1. Observe the **Master** realm selector in the top-left corner.
+2. Click the dropdown to see how you can switch between different isolated security environments.
+3. Select "Create Realm" to understand the basic metadata required for a new environment (e.g., Realm Name, Display Name).
+
+=== Step 3: Explore Configuration Modules
+Navigate through the sidebar to identify the primary management areas:
+*   **Manage:** Contains Users, Groups, Roles, and Clients.
+*   **Configure:** Houses Realm Settings, Authentication, Identity Providers, and User Federation.
+
+=== Step 4: Verify Admin Permissions
+1. Navigate to **Users** in the sidebar.
+2. Select your current administrative user.
+3. Click on the **Role Mapping** tab to view the fine-grained permissions currently assigned to your account. 
+
+[NOTE]
+For more information on managing these permissions, refer to the *Admin Console Access Control* chapter in the official documentation.
+
+== Troubleshooting Access Issues
+
+*   **Authentication Failure:** Verify if your account is locked due to excessive failed attempts or if your permissions were revoked in the master realm.
+*   **Reverse Proxy Issues:** If the page fails to load after a successful login, verify that your `--hostname-admin` matches the external URL provided by your load balancer or reverse proxy.

@@ -1,0 +1,13 @@
+#  Red Hat build of Keycloak on Red Hat OpenShift
+
+= Red Hat build of Keycloak on Red Hat OpenShift
+
+Red Hat build of Keycloak (RHBK) is designed to run efficiently in containerized environments, providing robust identity and access management for applications deployed on Red Hat OpenShift.
+
+Key aspects of running RHBK on OpenShift include:
+
+*   **Platform Support:** Deployment follows established Red Hat Middleware guidelines and aligns with the Red Hat OpenShift Container Platform Life Cycle Policy.
+*   **Version Compatibility:** Support is validated across multiple OpenShift releases (e.g., 4.12 through 4.21, depending on the RHBK version) ensuring a stable infrastructure foundation.
+*   **Architecture Flexibility:** RHBK supports diverse chipset architectures, including x86_64, s390x, ppc64le, and Aarch64, providing deployment versatility.
+*   **Standardized Runtime:** The solution utilizes the UBI9-based OpenJDK 17 container image, ensuring consistency, security, and performance within the OpenShift cluster.
+*   **Lifecycle Management:** Configuration and operational management leverage native OpenShift capabilities to simplify scaling, deployment, and maintenance of identity services.

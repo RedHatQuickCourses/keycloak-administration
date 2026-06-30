@@ -1,0 +1,72 @@
+#  Customizing user interfaces (Login, Registration, Account Management)
+
+= Customizing user interfaces (Login, Registration, Account Management)
+
+In the Red Hat build of Keycloak, themes define the look and feel of the user-facing pages. Customization allows organizations to align the authentication experience with their brand identity while maintaining a secure and consistent user journey across login, registration, and account management portals.
+
+== Understanding Keycloak Theming
+
+Keycloak uses a template-based engine (FreeMarker) to render HTML. Instead of modifying core files, you create a custom theme directory that overrides specific templates, styles, or resources.
+
+There are three primary areas of customization:
+* **Login Theme:** Controls the login, OTP, registration, and "forgot password" pages.
+* **Account Theme:** Controls the user profile and account management console.
+* **Email Theme:** Controls the look of automated emails sent to users (e.g., password reset links).
+
+== Dynamic User Profile Customization
+
+Modern Red Hat build of Keycloak versions prioritize dynamic configuration over static template changes. You can modify the user experience without deep-diving into code by using the User Profile feature.
+
+* **Attribute Validation:** Define validation rules on a per-attribute basis using built-in validators.
+* **Dynamic Rendering:** Keycloak dynamically renders forms (registration, update profile, account console) based on your schema definitions.
+* **Admin Console Integration:** Custom attributes are automatically rendered in the Administration Console, ensuring that your user management interface stays in sync with your defined attributes.
+
+== Guided Exercise: Customizing your Login Theme
+
+In this exercise, you will create a basic custom theme to alter the appearance of your login page.
+
+=== Prerequisites
+* A running instance of Red Hat build of Keycloak.
+* Access to the file system where Keycloak is installed.
+
+=== Step 1: Create the Directory Structure
+Navigate to your Keycloak installation directory and create the following structure:
+
+[source,bash]
+----
+mkdir -p themes/mycompany/login
+----
+
+=== Step 2: Define the Theme Metadata
+Create a `theme.properties` file inside `themes/mycompany/login/` to tell Keycloak to extend the base theme.
+
+[source,properties]
+----
+# themes/mycompany/login/theme.properties
+parent=base
+import=common/default
+----
+
+=== Step 3: Override a Template
+To change the login page layout, copy the `login.ftl` file from the base theme and place it in your custom directory.
+
+[source,bash]
+----
+cp themes/base/login/login.ftl themes/mycompany/login/
+----
+
+Open `themes/mycompany/login/login.ftl` and modify the HTML structure as needed. For example, adding a custom header or changing CSS classes.
+
+=== Step 4: Apply the Theme
+1. Log in to the **Admin Console**.
+2. Select your **Realm**.
+3. Navigate to **Realm settings** > **Themes**.
+4. In the **Login theme** dropdown, select `mycompany`.
+5. Click **Save**.
+
+== Best Practices for Customization
+
+* **Use the `parent` property:** Always extend the `base` or `keycloak` theme. This ensures that you inherit essential functionality (like security fixes and hidden form fields) while only overriding the specific files you need to change.
+* **Avoid hardcoding:** Whenever possible, use message bundles (`messages_en.properties`) for text strings to maintain multi-language support.
+* **Leverage User Profile configuration:** Before editing raw FTL files for user registration forms, check the "User Profile" tab in the Admin Console. Many structural changes to forms can be handled via configuration rather than template modification.
+* **Caching:** In development mode, you may want to disable theme caching in `conf/keycloak.conf` by setting `http-relative-path=/` and ensuring caching is disabled so changes reflect immediately without restarting the server.

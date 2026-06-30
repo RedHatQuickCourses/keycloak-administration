@@ -1,0 +1,54 @@
+#  Guided Exercise: Integrating Social Login with Red Hat build of Keycloak
+
+= Guided Exercise: Integrating Social Login with Red Hat build of Keycloak
+
+In this exercise, you will configure Red Hat build of Keycloak to allow users to authenticate using an external social identity provider (IdP). By offloading authentication to providers like Google or GitHub, you reduce the burden of password management and improve the user experience.
+
+== Prerequisites
+* A running instance of Red Hat build of Keycloak.
+* An account with an external Identity Provider (e.g., Google Cloud Console or GitHub Developer Settings) to obtain `Client ID` and `Client Secret`.
+* Access to the Keycloak Admin Console.
+
+== Step 1: Obtain Credentials from the Identity Provider
+Before configuring Keycloak, you must register your application with the social provider.
+
+1. Log in to your social provider's developer console (e.g., https://console.cloud.google.com/ for Google).
+2. Create a new OAuth 2.0 Client ID.
+3. Set the **Authorized redirect URI** to the value provided by Keycloak, which typically follows this pattern:
+   `https://<KEYCLOAK_HOST>/realms/<REALM_NAME>/broker/google/endpoint`
+4. Copy the generated **Client ID** and **Client Secret**.
+
+== Step 2: Configure the Identity Provider in Keycloak
+Now, enable the integration within the Keycloak Admin Console.
+
+1. Log in to the Admin Console.
+2. Select the **Realm** you want to configure from the top-left dropdown.
+3. In the left-hand menu, click **Identity providers**.
+4. Click the **Add provider** dropdown and select your desired provider (e.g., **Google**).
+5. Enter the **Client ID** and **Client Secret** you obtained in Step 1.
+6. Note the **Redirect URI** provided on this page to ensure it matches the configuration in your developer console.
+7. Click **Add**.
+
+== Step 3: Configure User Mapping (Optional)
+To ensure that information from the social provider (like email or name) is correctly stored in Keycloak, configure mappers.
+
+1. Within the Identity Provider configuration screen, click the **Mappers** tab.
+2. Click **Add mapper**.
+3. Select the attributes you wish to map (e.g., `Email`, `First Name`, `Last Name`).
+4. Click **Save**.
+
+== Step 4: Verify the Integration
+Test the configuration to ensure the authentication flow works as expected.
+
+1. Open your application's login page or the Keycloak Account Console.
+2. Observe that a new button (e.g., "Sign in with Google") appears on the login screen.
+3. Click the button and authenticate with your social account credentials.
+4. If this is your first time logging in via this provider, Keycloak may prompt you to link the social account to a local user account or register a new one.
+
+== Troubleshooting Tips
+* **Invalid Redirect URI:** Ensure the URI in the social provider's console exactly matches the one displayed in the Keycloak Identity Provider configuration.
+* **HTTPS Requirements:** Many social providers require your Keycloak instance to be served over HTTPS. If you are in development mode on `localhost`, ensure your browser allows the callback.
+* **Permissions:** Ensure the API/Scope permissions for the Client ID in the social provider console include `profile` and `email` access.
+
+== Conclusion
+You have successfully configured Red Hat build of Keycloak to delegate authentication to a social identity provider. Users can now authenticate using their existing social accounts, while you maintain centralized control over their access and roles within your Keycloak realms.

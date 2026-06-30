@@ -1,0 +1,47 @@
+#  Overview of Red Hat build of Keycloak features
+
+= Overview of Red Hat build of Keycloak features
+
+Red Hat build of Keycloak is an open-source identity and access management (IAM) solution designed for modern applications and services. It provides a centralized security layer that allows developers and administrators to secure their applications with minimal effort, eliminating the need to write custom authentication or authorization code.
+
+== Core Features
+
+Red Hat build of Keycloak offers a comprehensive suite of features designed to handle complex identity requirements at scale:
+
+*   **Single Sign-On (SSO):** Users authenticate once and gain access to multiple applications. This reduces password fatigue and simplifies the user experience across an organization's ecosystem.
+*   **Identity Brokering:** Keycloak acts as an intermediary, allowing users to authenticate via external third-party identity providers (such as Google, GitHub, or enterprise LDAP/Active Directory) while maintaining a consistent internal identity.
+*   **User Federation:** Keycloak can bridge existing user stores. You can import users from external LDAP or Active Directory systems or keep them synchronized, allowing for seamless integration with legacy enterprise infrastructure.
+*   **Standard-Based Security:** It is built on proven industry standards to ensure interoperability and robust security practices. Supported protocols include:
+    *   **OpenID Connect (OIDC):** An identity layer on top of OAuth 2.0.
+    *   **OAuth 2.0:** A framework for authorization.
+    *   **SAML 2.0:** An XML-based standard for exchanging authentication and authorization data.
+*   **Centralized Management:** Through the Admin Console and Admin CLI, administrators have a single pane of glass to manage users, roles, sessions, and security policies across all connected applications.
+*   **Customizable User Experience:** Keycloak provides a templating engine for the login, registration, and account management pages, allowing organizations to align the UI with their corporate branding.
+*   **Fine-Grained Authorization:** Beyond simple authentication, Keycloak supports Role-Based Access Control (RBAC) and attribute-based access control, enabling developers to enforce sophisticated security policies at the application level.
+
+== Why use Red Hat build of Keycloak?
+
+By delegating the security burden to Red Hat build of Keycloak, your applications benefit from:
+
+1.  **Credential Isolation:** Applications never handle user credentials directly; they rely on tokens issued by Keycloak.
+2.  **Rapid Time-to-Market:** Focus on building business logic rather than complex authentication flows.
+3.  **Enhanced Security:** Benefit from centralized auditing, brute-force protection, and consistent security updates provided by Red Hat.
+4.  **Operational Flexibility:** Whether running in bare-metal environments or containerized platforms like Red Hat OpenShift, Keycloak is designed for portability and high availability.
+
+[NOTE]
+====
+Red Hat build of Keycloak is designed to be highly extensible. If your organization has unique requirements—such as custom token mappers, proprietary authentication protocols, or unique user storage backends—the Keycloak Service Provider Interface (SPI) allows you to extend the platform functionality to meet these specific needs.
+====
+
+== Knowledge Check: Keycloak Systems
+
+1.  **True or False:** Red Hat build of Keycloak stores user credentials directly within the application database to ensure higher performance.
+2.  **Multiple Choice:** Which of the following is an identity layer built on top of OAuth 2.0 supported by Keycloak?
+    *   A) SAML 1.0
+    *   B) OpenID Connect (OIDC)
+    *   C) RADIUS
+    *   D) LDAP
+
+*Answers:*
+1. *False. Keycloak promotes credential isolation; applications work with tokens rather than storing or handling user credentials.*
+2. *B.*

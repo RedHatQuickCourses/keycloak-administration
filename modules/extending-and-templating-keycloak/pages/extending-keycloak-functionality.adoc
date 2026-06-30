@@ -1,0 +1,74 @@
+#  Extending Keycloak functionality
+
+= Extending Red Hat build of Keycloak Functionality
+
+Red Hat build of Keycloak is designed with a modular architecture that allows developers to extend its core capabilities to meet specific business requirements. While the platform provides comprehensive built-in features, such as predefined authentication flows (refer to section 8.3.1), certain advanced use cases may require custom logic.
+
+This section covers how to extend the platform, specifically focusing on the client-side extensibility via custom adapters.
+
+== Understanding Keycloak Extensibility
+Extending Red Hat build of Keycloak generally falls into two categories:
+
+*   **Server-side Extensions:** Customizing identity providers, user storage providers, or authentication SPIs (Service Provider Interfaces) to integrate with legacy systems or custom databases.
+*   **Client-side Extensions:** Leveraging the Keycloak JS adapter to control how applications interact with the Keycloak server, including custom login handling.
+
+== Customizing Client Interaction with Adapters
+For web applications using the `keycloak-js` adapter, developers can override default browser-based behaviors by implementing the `KeycloakAdapter` interface. This is useful when your application environment (e.g., specific mobile wrappers or non-standard browser environments) requires a non-standard way to handle redirects or token storage.
+
+=== Implementing a Custom Adapter
+To create a custom adapter, you must implement the `KeycloakAdapter` interface. Using TypeScript ensures that all required methods—such as `login`, `logout`, and `register`—are correctly defined.
+
+.Example: Defining a Custom Adapter in TypeScript
+[source,typescript]
+----
+import Keycloak, { KeycloakAdapter } from 'keycloak-js';
+
+// Implement the 'KeycloakAdapter' interface
+const MyCustomAdapter: KeycloakAdapter = {
+    async login(options) {
+        // Custom implementation for login
+        console.log("Custom login logic triggered");
+    },
+    async logout(options) {
+        // Custom implementation for logout
+    },
+    async register(options) {
+        // Custom implementation for registration
+    },
+    // The other required methods must be implemented here...
+};
+----
+
+=== Applying the Adapter
+Once your adapter is defined, pass it to the `init` method during the initialization of your Keycloak instance. This instructs the client-side library to delegate its core lifecycle actions to your custom implementation.
+
+.Example: Initializing Keycloak with a Custom Adapter
+[source,typescript]
+----
+const keycloak = new Keycloak({
+    url: "http://keycloak-server",
+    realm: "my-realm",
+    clientId: "my-app"
+});
+
+await keycloak.init({
+    adapter: MyCustomAdapter,
+});
+----
+
+== Hands-on Activity: Configuring a Custom Client Adapter
+
+In this activity, you will prepare your application to use a custom adapter to log specific authentication events to your browser console.
+
+. **Prerequisites**: Ensure you have a basic project initialized with `keycloak-js`.
+. **Step 1: Create the Adapter**: Create a new file named `custom-adapter.ts`. Implement the `KeycloakAdapter` interface. For the `login` method, add a `console.log` statement that prints "Authentication initiated via Custom Adapter."
+. **Step 2: Integrate the Adapter**: In your main application file, import `MyCustomAdapter` and update your `keycloak.init()` call to include the `adapter` property.
+. **Step 3: Verification**: 
+*   Compile your TypeScript code.
+*   Launch your application in a browser.
+*   Open the browser's Developer Tools (Console tab).
+*   Trigger the `keycloak.login()` function and observe if your custom log message appears before the redirect occurs.
+
+== Troubleshooting Tips
+*   **Incomplete Implementation**: If you fail to implement all methods required by the `KeycloakAdapter` interface, your TypeScript compiler will throw an error. Ensure all interface members are present.
+*   **Adapter Conflicts**: If `keycloak-js` behavior seems inconsistent, verify that your custom adapter is not overriding standard browser navigation methods in a way that breaks the OIDC/OAuth 2.0 flow. Always call the super-methods or replicate the original logic if you need to maintain base functionality.

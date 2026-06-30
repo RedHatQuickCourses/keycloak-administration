@@ -1,0 +1,9 @@
+#  Extending and Templating Keycloak
+
+= Extending and Templating Keycloak
+
+Red Hat build of Keycloak provides flexibility to customize and extend core functionality to meet specific application and branding requirements:
+
+*   **UI Customization**: Modify login, registration, and account management templates to align with organizational branding and user experience standards.
+*   **Custom Adapters**: Extend client integration capabilities by implementing the `KeycloakAdapter` interface, allowing developers to create custom logic for authentication and session management.
+*   **Flow Customization**: While built-in authentication flows are immutable, you can alter their specific requirements and execution logic to satisfy unique security or business policies.

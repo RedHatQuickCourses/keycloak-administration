@@ -1,0 +1,49 @@
+#  Social login configuration
+
+= Social Login Configuration
+
+In modern identity management, users increasingly prefer the convenience of using existing identities to access new applications. Red Hat build of Keycloak simplifies this by acting as an Identity Broker, allowing you to delegate authentication to trusted third-party social networks.
+
+== Understanding Social Identity Providers
+Social identity providers enable your users to authenticate using their existing accounts from platforms like Google, GitHub, Facebook, and Microsoft. By configuring these providers, you reduce friction during the user onboarding process, as users do not need to create and remember yet another set of credentials.
+
+Keycloak handles the complex OAuth 2.0 or OpenID Connect handshake behind the scenes, ensuring that the identity exchange is secure and that user attributes are mapped correctly into your realm.
+
+== Supported Providers
+Red Hat build of Keycloak provides native support for a wide array of social platforms, including:
+*   **Development & Collaboration:** GitHub, GitLab, Bitbucket, Stack Overflow
+*   **Social & Professional:** Facebook, LinkedIn, Twitter, Instagram
+*   **Enterprise & Cloud:** Google, Microsoft, OpenShift v4, PayPal
+
+== Guided Exercise: Integrating Social Login
+
+This exercise walks you through the steps required to configure a social identity provider in your Keycloak realm.
+
+=== Prerequisites
+*   Access to the Keycloak Administration Console.
+*   An existing client application (e.g., a "Client ID" and "Client Secret") registered with the provider you choose (e.g., Google or GitHub).
+
+=== Procedure
+
+1.  **Access Identity Providers:**
+    Log in to the Keycloak Admin Console. In the left-hand navigation menu, click **Identity Providers**.
+
+2.  **Add a Provider:**
+    Locate the **Add provider** dropdown menu. This list contains all supported social networks and standard protocols. Select your desired provider (e.g., **Facebook** or **GitHub**).
+
+3.  **Configure Provider Details:**
+    Once selected, the configuration screen appears. You must provide the following:
+    *   **Client ID:** The identifier provided by the social network when you registered your application.
+    *   **Client Secret:** The secret key associated with your application on the social network's developer dashboard.
+
+4.  **Save and Enable:**
+    Click **Add** or **Save**. Ensure the **Enabled** toggle is set to `On`.
+
+5.  **Verify the Flow:**
+    Navigate to your application's login page. You will see a button corresponding to the social provider you just configured. When a user clicks this button, they will be redirected to the social network to authenticate. Upon successful login, they are redirected back to Keycloak, where a local user account is automatically linked or created based on your mapping configuration.
+
+== Best Practices for Social Brokering
+
+*   **Attribute Mapping:** Use the **Mappers** tab within your Identity Provider configuration to sync information like email addresses, first names, and last names from the social provider to the Keycloak user profile.
+*   **First Broker Login Flow:** Keycloak uses a default "First Broker Login" flow. You can customize this flow if you need to perform additional actions, such as forcing users to update their profile or accept terms of service upon their first social login.
+*   **Security:** Always use HTTPS for your Keycloak deployment. Since you are handling tokens from third-party providers, ensuring the communication channel between the user, the social provider, and Keycloak is encrypted is critical.

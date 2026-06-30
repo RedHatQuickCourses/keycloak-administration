@@ -1,0 +1,9 @@
+#  Authentication and Authorization
+
+== Authentication and Authorization
+
+Authentication and Authorization are the core security pillars of the Red Hat build of Keycloak, designed to manage user identity and access control within applications.
+
+*   **Authentication:** Verifies user identity through configurable authentication flows, allowing for flexible login requirements and custom session management.
+*   **Authorization:** Enforces access control using Role-Based Access Control (RBAC) and permission-based models to ensure users only access authorized resources.
+*   **Customization:** Provides the capability to tailor authentication sessions to meet specific security policies and application needs.

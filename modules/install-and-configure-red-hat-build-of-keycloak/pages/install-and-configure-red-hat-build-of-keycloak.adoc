@@ -1,0 +1,13 @@
+#  Install and Configure Red Hat build of Keycloak
+
+= Install and Configure Red Hat build of Keycloak
+
+Installing and configuring the Red Hat build of Keycloak involves setting up the server environment, accessing the administrative interfaces, and defining initial security parameters.
+
+Key aspects include:
+
+*   **Development Mode:** Utilizing the `start-dev` command for rapid deployment and testing in containerized environments, such as Podman.
+*   **Security Requirements:** Implementing secure configuration practices to transition from development to production environments.
+*   **Admin Console:** Using the web-based interface to manage realms, clients, and security settings.
+*   **Admin CLI:** Leveraging command-line tools to automate configuration tasks and perform administrative operations.
+*   **Deployment:** Integrating the server into target environments, including containerized deployments on platforms like Red Hat OpenShift.

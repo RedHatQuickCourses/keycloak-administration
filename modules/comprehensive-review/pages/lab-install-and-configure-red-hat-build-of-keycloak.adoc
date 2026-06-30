@@ -1,0 +1,68 @@
+#  Lab: Install and Configure Red Hat build of Keycloak
+
+= Lab: Install and Configure Red Hat build of Keycloak
+
+This lab focuses on setting up a Red Hat build of Keycloak instance for development and testing purposes. You will use `podman` to deploy a containerized instance and perform initial configuration via the Admin Console.
+
+== Objectives
+* Deploy Red Hat build of Keycloak in development mode.
+* Initialize the administrative account.
+* Access and explore the Admin Console.
+
+== Prerequisites
+* A system with `podman` installed.
+* Access to the Red Hat Ecosystem Catalog to pull the `rhbk/keycloak-rhel9` image.
+* Network access to port 8080.
+
+== Activity: Deploying Keycloak in Development Mode
+
+The development mode is optimized for rapid prototyping. It disables strict HTTPS requirements and defaults to an in-memory database.
+
+[IMPORTANT]
+====
+Development mode is intended strictly for local testing. Never use these default settings or this startup mode in a production environment as it lacks enterprise-grade security configurations.
+====
+
+1. **Start the Keycloak container:**
+Execute the following command in your terminal to pull the image and start the service:
+
+[source,bash]
+----
+podman run --name mykeycloak -p 127.0.0.1:8080:8080 \
+  -e KC_BOOTSTRAP_ADMIN_USERNAME=admin \
+  -e KC_BOOTSTRAP_ADMIN_PASSWORD=change_me \
+  registry.redhat.io/rhbk/keycloak-rhel9:26.6 \
+  start-dev
+----
+
+2. **Verify Initialization:**
+Watch the container logs. Once you see the message `Keycloak <version> started in (development) mode`, the server is ready to accept connections.
+
+== Activity: Exploring the Admin Console
+
+Once the server is running, you must configure the initial realm settings.
+
+1. **Access the Console:**
+Open your web browser and navigate to `http://localhost:8080`.
+
+2. **Authenticate:**
+Click the **Administration Console** link. Log in using the credentials defined in the deployment command:
+* **Username:** `admin`
+* **Password:** `change_me`
+
+3. **Explore the Interface:**
+* **Realms:** Observe the default `master` realm. The master realm is used to manage the Keycloak instance itself and should be reserved for administrative tasks.
+* **Clients:** Navigate to the Clients section to see the default integrated clients.
+* **Users:** Note how users are currently managed within the internal database.
+
+== Troubleshooting Guidance
+
+* **Port Conflicts:** If `8080` is already in use on your host machine, modify the port mapping in the `podman run` command (e.g., `-p 127.0.0.1:8081:8080`).
+* **Container Persistence:** Since development mode often uses an in-memory database, restarting the container will wipe all configuration changes. If you need to persist data, you must configure a persistent volume mapping to `/opt/keycloak/data`.
+* **Login Failures:** If you are unable to log in, verify that the `KC_BOOTSTRAP_ADMIN_USERNAME` and `KC_BOOTSTRAP_ADMIN_PASSWORD` environment variables were passed correctly during the container creation.
+
+== Review
+After completing these steps, you have successfully:
+* Provisioned a containerized Red Hat build of Keycloak.
+* Secured the initial administrative access.
+* Verified the connectivity and basic functionality of the Admin Console.

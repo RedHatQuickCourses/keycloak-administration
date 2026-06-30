@@ -1,0 +1,55 @@
+#  User authentication flows
+
+= User authentication flows
+
+Red Hat build of Keycloak provides a flexible and powerful mechanism for managing how users interact with the system through **Authentication Flows**. An authentication flow serves as a container for authentications, screens, and actions that occur during critical lifecycle events such as login, user registration, and credential recovery.
+
+== Understanding Authentication Flows
+
+At its core, an authentication flow defines a sequence of steps that a user must complete to verify their identity or provide required information. Because modern security requirements vary across applications, Keycloak allows these flows to be highly customizable.
+
+Keycloak organizes these interactions into specific execution types:
+
+*   **Login Flows:** Define the credential types required for access (e.g., password, One-Time Password (OTP), or WebAuthn).
+*   **Registration Flows:** Define the profile information a user must provide during sign-up and include security measures like reCAPTCHA to prevent bot-driven spam.
+*   **Credential Reset Flows:** Define the mandatory actions a user must perform to securely recover or reset a forgotten password.
+
+== Anatomy of a Flow
+
+An authentication flow is structured as a tree of executions. Each execution is a specific action or validation step. You can configure these executions with different requirements:
+
+*   **REQUIRED:** The user must successfully complete this step to proceed.
+*   **ALTERNATIVE:** The user can choose between one or more steps (e.g., "Login with Password" OR "Login with OTP").
+*   **DISABLED:** The step is ignored during the flow execution.
+*   **CONDITIONAL:** The step is executed only if specific conditions are met.
+
+== Guided Exercise: Customizing a Login Flow
+
+In this exercise, you will explore how to configure a simple authentication flow to enforce multi-factor authentication for a specific user group.
+
+=== Prerequisites
+* An active Red Hat build of Keycloak instance.
+* Access to the Admin Console as a realm administrator.
+
+=== Steps
+
+1.  **Navigate to Flows:** Log in to the Admin Console, select your Realm, and click **Authentication** in the left-hand navigation menu.
+2.  **View Existing Flows:** You will see a list of pre-configured flows. Select the **Browser** flow. This is the default flow used for web-based browser logins.
+3.  **Create a Copy:** It is best practice not to modify built-in flows directly. Click the **Duplicate** button next to the Browser flow and name it `Custom-Secure-Browser`.
+4.  **Add Execution:**
+    *   In your `Custom-Secure-Browser` flow, click the **Add step** button.
+    *   Select `OTP Form` from the list of available authenticators.
+    *   Change the requirement for `OTP Form` from `DISABLED` to `REQUIRED`.
+5.  **Bind the Flow:**
+    *   Navigate to the **Bindings** tab within the Authentication menu.
+    *   Locate the **Browser flow** dropdown and select your new `Custom-Secure-Browser` flow.
+    *   Click **Save**.
+
+=== Verification
+Open an Incognito window, navigate to your application, and attempt to log in. You will notice that after providing your standard username and password, the system now requires the additional OTP step, enforcing the new security policy defined in your flow.
+
+== Troubleshooting Tips
+
+*   **Flow Testing:** Always test new flows using an Incognito/Private browser window to ensure you do not lock yourself out of the Admin Console.
+*   **Requirement Conflicts:** If you set multiple authenticators as `REQUIRED`, ensure they are logically ordered. If a step fails, the entire authentication attempt will be rejected.
+*   **Execution Order:** You can drag and drop steps in the Admin Console to change their execution order. Always verify the sequence after making adjustments.

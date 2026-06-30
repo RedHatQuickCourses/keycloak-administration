@@ -1,0 +1,93 @@
+#  Guided Exercise: Templating Keycloak
+
+= Guided Exercise: Templating Keycloak
+
+In this exercise, you will customize the look and feel of the Red Hat build of Keycloak by overriding the default themes. Keycloak uses a FreeMarker-based templating engine that allows you to modify login pages, account management consoles, and email templates to match your organization’s branding.
+
+== Prerequisites
+* A running instance of Red Hat build of Keycloak 26.6.
+* Access to the file system where the Keycloak server is installed.
+* A basic understanding of HTML and CSS.
+
+== Step 1: Locating the Themes Directory
+By default, Keycloak stores its themes in the `themes/` directory within the server installation path. You should never modify these files directly, as your changes will be overwritten during server upgrades. Instead, you will create a custom theme directory.
+
+1. Navigate to your Keycloak installation directory.
+2. Create a new directory structure for your custom theme:
++
+[source,bash]
+----
+mkdir -p themes/my-company/login/resources/css
+mkdir -p themes/my-company/login/resources/img
+----
+
+== Step 2: Creating the Theme Configuration
+Keycloak requires a `theme.properties` file to recognize your new theme.
+
+1. Create a file named `theme.properties` inside the `themes/my-company/login/` directory.
+2. Add the following content to inherit from the base Keycloak theme:
++
+[source,properties]
+----
+parent=base
+import=common/keycloak
+----
+
+== Step 3: Overriding a Template
+To change the structure of the login page, you must copy the template file from the base theme and modify it.
+
+1. Copy the login template from the Keycloak base directory to your custom directory:
++
+[source,bash]
+----
+cp themes/base/login/login.ftl themes/my-company/login/
+----
+
+2. Open `themes/my-company/login/login.ftl` in your editor. 
+3. Locate the header section and add a custom welcome message or your company logo reference.
+
+== Step 4: Applying Custom Styles
+You can override the CSS to change colors, fonts, and layout.
+
+1. Create a file named `styles.css` in `themes/my-company/login/resources/css/`.
+2. Add your custom CSS, for example, to change the background color:
++
+[source,css]
+----
+body {
+    background-color: #f0f0f0 !important;
+}
+----
+
+3. Update your `theme.properties` file to include your new stylesheet:
++
+[source,properties]
+----
+styles=css/styles.css
+----
+
+== Step 5: Enabling the Theme in the Admin Console
+Once the files are in place, you must instruct Keycloak to use your new theme.
+
+1. Open the **Admin Console** and log in.
+2. Select your **Realm** from the dropdown menu in the top-left corner.
+3. In the left navigation menu, go to **Realm settings**.
+4. Click the **Themes** tab.
+5. In the **Login theme** dropdown, select `my-company`.
+6. Click **Save**.
+
+== Step 6: Verification
+1. Open a new Incognito/Private browser window.
+2. Navigate to your login page (e.g., `http://localhost:8080/realms/<your-realm>/account`).
+3. Verify that your custom background color and any changes made to `login.ftl` are rendered correctly.
+
+== Troubleshooting
+* **Changes not appearing:** If you are in development mode, ensure you have disabled theme caching in `conf/keycloak.conf`:
++
+[source,properties]
+----
+http-relative-path=/
+# Disable theme caching for development
+kc.cache.theme=off
+----
+* **Syntax Errors:** If the page fails to render, check the server logs; FreeMarker errors will be clearly indicated with line numbers.

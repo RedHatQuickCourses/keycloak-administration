@@ -1,0 +1,57 @@
+#  Guided Exercise: Authenticate Users with Red Hat build of Keycloak
+
+= Guided Exercise: Authenticate Users with Red Hat build of Keycloak
+
+In this exercise, you will configure a basic authentication flow to verify user identity against the Red Hat build of Keycloak internal user database. We will define a realm, create a user, and test the authentication process using the Admin Console.
+
+== Prerequisites
+* A running instance of Red Hat build of Keycloak 26.6.
+* Access to the Keycloak Admin Console.
+
+== Step 1: Create a Realm
+Realms are isolated environments that contain their own sets of users, credentials, roles, and groups.
+
+1. Log in to the Admin Console.
+2. In the top-left corner, click the dropdown menu and select **Create realm**.
+3. Enter `training-realm` as the name.
+4. Click **Create**.
+
+== Step 2: Create a User
+Now, we will define a test user within the new realm.
+
+1. In the left navigation menu, select **Users**.
+2. Click **Add user**.
+3. Enter the following details:
+   * **Username:** `jdoe`
+   * **Email:** `jdoe@example.com`
+   * **First name:** `John`
+   * **Last name:** `Doe`
+4. Click **Create**.
+
+== Step 3: Set User Credentials
+To allow `jdoe` to authenticate, you must define a temporary password.
+
+1. Navigate to the **Credentials** tab within the user's profile.
+2. Click **Set password**.
+3. Enter a secure password (e.g., `Password123!`).
+4. Toggle **Temporary** to **OFF** if you do not want the user to be forced to change the password upon their first login.
+5. Click **Save** and confirm the change in the modal prompt.
+
+== Step 4: Verify Authentication
+To verify that the authentication flow is working, we will use the built-in account console.
+
+1. In the top-right corner of the Admin Console, click your administrator profile icon.
+2. Select **Manage account**.
+3. Log out of the admin session if prompted.
+4. Attempt to log in using the credentials you just created:
+   * **Username:** `jdoe`
+   * **Password:** `Password123!`
+5. If successful, you will be directed to the Keycloak Account Management console for `jdoe`.
+
+== Troubleshooting
+* **Authentication Error:** Ensure the user is not locked and that the password was saved correctly. Check the "Attributes" tab to ensure the user is enabled.
+* **Realm mismatch:** Ensure you are testing against `training-realm` and not the `master` realm.
+* **Console access:** If the Account Console page does not load, verify that the `training-realm` is configured with the default browser flow in the **Authentication** tab.
+
+=== Summary
+You have successfully isolated a set of credentials within a dedicated realm and validated the identity verification process. This forms the foundation for more complex scenarios, such as OIDC integration or MFA enforcement, which you will explore in subsequent modules.

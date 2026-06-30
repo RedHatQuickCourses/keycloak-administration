@@ -1,0 +1,72 @@
+#  LDAP and Active Directory integration
+
+= LDAP and Active Directory Integration
+
+Red Hat build of Keycloak provides robust support for integrating existing directory services, allowing organizations to centralize identity management. By leveraging LDAP (Lightweight Directory Access Protocol) and Microsoft Active Directory (MSAD), you can delegate user authentication and attribute synchronization to your existing enterprise infrastructure.
+
+== Overview of User Federation
+User federation allows Keycloak to act as a bridge between your applications and an external user store. Instead of migrating all users into the Keycloak database, Keycloak queries your LDAP or Active Directory server in real-time or via periodic synchronization.
+
+Key benefits include:
+* **Single Source of Truth:** Manage user lifecycles in your existing directory.
+* **Seamless SSO:** Users utilize their corporate credentials to access applications protected by Keycloak.
+* **Flexible Mapping:** Map LDAP attributes (like `department` or `employeeID`) to Keycloak user attributes or tokens.
+
+== Configuring LDAP Integration
+To connect your directory service, you must define an LDAP provider within a specific Realm.
+
+[procedure]
+. In the Admin Console, navigate to **User Federation**.
+. Click **Add provider** and select **ldap**.
+. Configure the connection settings:
+* **Connection URL:** The LDAP/LDAPS URL (e.g., `ldap://ldap.example.com:389`).
+* **Users DN:** The base DN where your users reside (e.g., `ou=users,dc=example,dc=com`).
+* **Bind DN/Password:** Credentials used by Keycloak to query the directory.
+
+[NOTE]
+====
+Ensure you set the **LDAP bind credential** correctly in the LDAP settings. This credential must have read permissions for the specified User DN subtree to allow Keycloak to authenticate and fetch user details.
+====
+
+== Integrating Microsoft Active Directory
+Active Directory requires specific handling for user account control and state management. Keycloak includes dedicated mappers to ensure compatibility with AD-specific attributes.
+
+=== Adding an MS Active Directory Mapper
+When integrating with MSAD, you often need to map the `userAccountControl` attribute to handle disabled accounts correctly. You can automate this process using the Admin CLI (`kcadm.sh`).
+
+.Procedure
+1. Identify the `parentId` of your existing LDAP provider by listing current components:
++
+[source,bash]
+----
+kcadm.sh get components -r <realm-name>
+----
+2. Create the MSAD mapper by executing the `create` command:
++
+[source,bash]
+----
+$ kcadm.sh create components -r demorealm \
+  -s name=msad-user-account-control-mapper \
+  -s providerId=msad-user-account-control-mapper \
+  -s providerType=org.keycloak.storage.ldap.mappers.LDAPStorageMapper \
+  -s parentId=<your-ldap-provider-id>
+----
+
+== Guided Exercise: Federating Users with LDAP
+In this exercise, you will establish a connection to an LDAP server and verify connectivity.
+
+*Step 1: Define the LDAP Provider*
+Navigate to the Admin Console, select your realm, and add the LDAP provider using the connection details provided by your infrastructure team.
+
+*Step 2: Test the Connection*
+Use the "Test connection" and "Test authentication" buttons within the LDAP provider configuration page to verify that the credentials and DN structure are valid.
+
+*Step 3: Synchronize Users*
+Use the **Synchronize all users** action to import existing directory users into the Keycloak user cache, ensuring they are searchable for role assignments.
+
+== Lab: Authentication and Authorization with LDAP
+[lab]
+. **Task 1:** Configure an LDAP connection in the `demorealm`.
+. **Task 2:** Add an MS Active Directory mapper to handle user status synchronization.
+. **Task 3:** Enable "Import Users" to allow Keycloak to mirror the LDAP user profile in its internal database.
+. **Task 4:** Attempt to log in via the Account Console using a credential existing only in the LDAP server. Verify that the user record appears in the Keycloak Admin Console after the first successful login.
