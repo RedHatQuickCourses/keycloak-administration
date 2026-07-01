@@ -1,5 +1,3 @@
-#  Deploying Keycloak in containerized environments
-
 = Deploying Red Hat build of Keycloak in Containerized Environments
 :page-audio-src: deploying-keycloak-in-containerized-environments.wav
 :page-transcript-src: deploying-keycloak-in-containerized-environments.txt

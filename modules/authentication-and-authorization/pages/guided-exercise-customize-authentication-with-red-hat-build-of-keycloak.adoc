@@ -1,5 +1,3 @@
-#  Guided Exercise: Customize authentication with Red Hat build of Keycloak
-
 = Guided Exercise: Customize authentication with Red Hat build of Keycloak
 :page-audio-src: guided-exercise-customize-authentication-with-red-hat-build-of-keycloak.wav
 :page-transcript-src: guided-exercise-customize-authentication-with-red-hat-build-of-keycloak.txt

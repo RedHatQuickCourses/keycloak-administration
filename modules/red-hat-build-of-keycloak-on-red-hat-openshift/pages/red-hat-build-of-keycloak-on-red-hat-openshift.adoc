@@ -1,5 +1,3 @@
-#  Red Hat build of Keycloak on Red Hat OpenShift
-
 = Red Hat build of Keycloak on Red Hat OpenShift
 :page-audio-src: red-hat-build-of-keycloak-on-red-hat-openshift.wav
 :page-transcript-src: red-hat-build-of-keycloak-on-red-hat-openshift.txt

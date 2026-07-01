@@ -1,5 +1,0 @@
-To get started with your content development, let's look at how to manage your sections effectively.
-
-First, you can create multiple copies of this section whenever you need to expand your training material. Conversely, be sure to remove any sections or chapter pages that are unnecessary for your current module to keep the course focused. 
-
-As you move forward, customize each section as appropriate for your specific learning objectives. Finally, keep in mind that maintaining a good learner experience is key; ensure that each page contains a manageable amount of content so your learners can process the information effectively.

@@ -1,5 +1,0 @@
-In this chapter, we will walk through the process of managing section entries within your project.
-
-To update your documentation structure, you will need to modify the `antora.yaml` file. Simply add or remove the necessary section entries directly within that file to reflect the changes you wish to make. 
-
-It is important to remember that for every change you make to the configuration file, you must also manage your file system accordingly. Please ensure that you create or delete the corresponding directory for each chapter to keep your project structure consistent and synchronized with your `antora.yaml` configuration.

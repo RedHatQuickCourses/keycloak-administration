@@ -1,5 +1,3 @@
-#  Admin CLI operations
-
 = Admin CLI operations
 :page-audio-src: admin-cli-operations.wav
 :page-transcript-src: admin-cli-operations.txt

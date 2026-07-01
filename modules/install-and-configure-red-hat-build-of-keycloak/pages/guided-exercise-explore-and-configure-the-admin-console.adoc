@@ -1,5 +1,3 @@
-#  Guided Exercise: Explore and Configure the Admin Console
-
 = Guided Exercise: Explore and Configure the Admin Console
 :page-audio-src: guided-exercise-explore-and-configure-the-admin-console.wav
 :page-transcript-src: guided-exercise-explore-and-configure-the-admin-console.txt

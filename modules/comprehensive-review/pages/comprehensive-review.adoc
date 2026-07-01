@@ -1,5 +1,3 @@
-#  Comprehensive Review
-
 = Comprehensive Review
 :page-audio-src: comprehensive-review.wav
 :page-transcript-src: comprehensive-review.txt

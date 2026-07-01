@@ -1,5 +1,3 @@
-#  Guided Exercise: Templating Keycloak
-
 = Guided Exercise: Templating Keycloak
 :page-audio-src: guided-exercise-templating-keycloak.wav
 :page-transcript-src: guided-exercise-templating-keycloak.txt

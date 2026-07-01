@@ -1,5 +1,3 @@
-#  Configuration and management on OpenShift
-
 = Configuration and Management on Red Hat build of Keycloak on OpenShift
 :page-audio-src: configuration-and-management-on-openshift.wav
 :page-transcript-src: configuration-and-management-on-openshift.txt

@@ -1,9 +1,0 @@
-In this section, we will look at how to use tabbed code blocks to present information efficiently. This feature is particularly useful when you need to provide examples in multiple programming languages or when you want to separate exercise instructions from their corresponding solutions.
-
-First, let’s consider how to handle multiple languages. When you have code that serves the same purpose across different environments, you can group them using tabs. For example, if you are demonstrating a basic "Hello" program, you can provide the implementation in Java and Python side-by-side. The user can simply click the tab for the language they are currently working with to view the specific syntax required.
-
-Another powerful way to use this feature is for interactive learning, specifically to manage exercises and their solutions. By placing the instruction in one tab and the code solution in another, you allow learners to attempt the task on their own before checking the provided answer. 
-
-For instance, consider a challenge where you are asked to write a function that returns the sum of two integers. By toggling to the solution tab, you can view a clean implementation in JavaScript, which defines an add function that takes two parameters and returns their sum, followed by a console log that tests the function with the values two and three. 
-
-Using these tabbed interfaces helps keep your training documentation clean and focused, ensuring that learners have quick access to the information most relevant to their needs.

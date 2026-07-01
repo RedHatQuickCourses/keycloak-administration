@@ -1,5 +1,3 @@
-#  Role-based and permission-based authorization
-
 = Role-based and permission-based authorization
 :page-audio-src: role-based-and-permission-based-authorization.wav
 :page-transcript-src: role-based-and-permission-based-authorization.txt

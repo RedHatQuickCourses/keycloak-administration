@@ -1,5 +1,3 @@
-#  Guided Exercise: Authenticate Users with Red Hat build of Keycloak
-
 = Guided Exercise: Authenticate Users with Red Hat build of Keycloak
 :page-audio-src: guided-exercise-authenticate-users-with-red-hat-build-of-keycloak.wav
 :page-transcript-src: guided-exercise-authenticate-users-with-red-hat-build-of-keycloak.txt

@@ -1,5 +1,3 @@
-#  Admin Console exploration and configuration
-
 = Admin Console exploration and configuration
 :page-audio-src: admin-console-exploration-and-configuration.wav
 :page-transcript-src: admin-console-exploration-and-configuration.txt

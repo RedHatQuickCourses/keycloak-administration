@@ -1,5 +1,3 @@
-#  Quiz: Describe Keycloak Systems
-
 = Quiz: Describe Keycloak Systems
 :page-audio-src: quiz-describe-keycloak-systems.wav
 :page-transcript-src: quiz-describe-keycloak-systems.txt

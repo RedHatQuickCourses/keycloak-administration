@@ -1,5 +1,3 @@
-#  Extending Keycloak functionality
-
 = Extending Red Hat build of Keycloak Functionality
 :page-audio-src: extending-keycloak-functionality.wav
 :page-transcript-src: extending-keycloak-functionality.txt

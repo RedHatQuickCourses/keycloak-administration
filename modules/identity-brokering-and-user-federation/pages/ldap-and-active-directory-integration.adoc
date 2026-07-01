@@ -1,5 +1,3 @@
-#  LDAP and Active Directory integration
-
 = LDAP and Active Directory Integration
 :page-audio-src: ldap-and-active-directory-integration.wav
 :page-transcript-src: ldap-and-active-directory-integration.txt

@@ -1,5 +1,3 @@
-#  Customizing user interfaces (Login, Registration, Account Management)
-
 = Customizing user interfaces (Login, Registration, Account Management)
 :page-audio-src: customizing-user-interfaces-login-registration-account-management.wav
 :page-transcript-src: customizing-user-interfaces-login-registration-account-management.txt

@@ -1,5 +1,3 @@
-#  Architecture and operational concepts
-
 = Architecture and Operational Concepts
 :page-audio-src: architecture-and-operational-concepts.wav
 :page-transcript-src: architecture-and-operational-concepts.txt

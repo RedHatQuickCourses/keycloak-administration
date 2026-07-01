@@ -1,5 +1,3 @@
-#  User authentication flows
-
 = User authentication flows
 :page-audio-src: user-authentication-flows.wav
 :page-transcript-src: user-authentication-flows.txt

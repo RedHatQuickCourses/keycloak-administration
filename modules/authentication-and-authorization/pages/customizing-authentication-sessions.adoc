@@ -1,5 +1,3 @@
-#  Customizing authentication sessions
-
 = Customizing Authentication Sessions
 :page-audio-src: customizing-authentication-sessions.wav
 :page-transcript-src: customizing-authentication-sessions.txt

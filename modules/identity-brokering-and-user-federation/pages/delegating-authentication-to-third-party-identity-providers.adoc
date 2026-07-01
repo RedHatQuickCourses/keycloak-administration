@@ -1,5 +1,3 @@
-#  Delegating authentication to third-party identity providers
-
 = Delegating Authentication to Third-Party Identity Providers
 :page-audio-src: delegating-authentication-to-third-party-identity-providers.wav
 :page-transcript-src: delegating-authentication-to-third-party-identity-providers.txt

@@ -1,5 +1,3 @@
-#  Lab: Authentication and Authorization
-
 = Lab: Authentication and Authorization
 :page-audio-src: lab-authentication-and-authorization.wav
 :page-transcript-src: lab-authentication-and-authorization.txt

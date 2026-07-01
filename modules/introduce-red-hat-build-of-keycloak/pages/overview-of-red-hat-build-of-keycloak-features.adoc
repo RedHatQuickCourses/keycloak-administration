@@ -1,5 +1,3 @@
-#  Overview of Red Hat build of Keycloak features
-
 = Overview of Red Hat build of Keycloak features
 :page-audio-src: overview-of-red-hat-build-of-keycloak-features.wav
 :page-transcript-src: overview-of-red-hat-build-of-keycloak-features.txt

@@ -1,5 +1,3 @@
-#  Guided Exercise: Federating Users with Red Hat build of Keycloak
-
 = Guided Exercise: Federating Users with Red Hat build of Keycloak
 :page-audio-src: guided-exercise-federating-users-with-red-hat-build-of-keycloak.wav
 :page-transcript-src: guided-exercise-federating-users-with-red-hat-build-of-keycloak.txt
